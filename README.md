@@ -6,7 +6,7 @@ Install Cordova `npm install -g cordova`
 
 Add required platforms `cordova platform add <platform name>`
 
-Configure Platforms:
+Configure Each Platform:
 
 - **Android** https://cordova.apache.org/docs/en/10.x/guide/platforms/android/index.html
 
@@ -18,6 +18,7 @@ Configure Platforms:
 
 - **Electron**  https://cordova.apache.org/docs/en/10.x/guide/platforms/electron/index.html
 
-Build Angular application into Cordova  `ng build --configuration production --base-href . --output-path ..\cordova\www\`
+Build Angular application into Cordova
+`ng build --configuration production --base-href . --output-path ..\cordova\www\`
 
 Run your app `cordova run <platform name>`
