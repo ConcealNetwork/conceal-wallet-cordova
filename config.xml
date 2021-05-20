@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+	<name>Conceal Hub</name>
+	<description>
+		One application to end them all.
+	</description>
+	<author email="ccx@conceal.network" href="https://conceal.network">
+		Conceal Network
+	</author>
+	<content src="index.html" />
+	<access origin="*" />
+	<allow-intent href="http://*/*" />
+	<allow-intent href="https://*/*" />
+	<allow-intent href="tel:*" />
+	<allow-intent href="sms:*" />
+	<allow-intent href="mailto:*" />
+	<allow-intent href="geo:*" />
+	<platform name="android">
+		<allow-intent href="market:*" />
+		<icon src="www/assets/icons/icon-72x72.png" density="ldpi" />
+		<icon src="www/assets/icons/icon-96x96.png" density="mdpi" />
+		<icon src="www/assets/icons/icon-128x128.png" density="hdpi" />
+		<icon src="www/assets/icons/icon-144x144.png" density="xhdpi" />
+		<icon src="www/assets/icons/icon-152x152.png" density="xxhdpi" />
+		<icon src="www/assets/icons/icon-384x384.png" density="xxxhdpi" />
+	</platform>
+	<platform name="ios">
+		<allow-intent href="itms:*" />
+		<allow-intent href="itms-apps:*" />
+	</platform>
+	<platform name="windows">
+		<icon src="www/assets/icons/icon-50x50.png" target="StoreLogo" />
+		<icon src="www/assets/icons/icon-30x30.png" target="Square30x30Logo" />
+		<icon src="www/assets/icons/icon-44x44.png" target="Square44x44Logo" />
+		<icon src="www/assets/icons/icon-70x70.png" target="Square70x70Logo" />
+		<icon src="www/assets/icons/icon-71x71.png" target="Square71x71Logo" />
+		<icon src="www/assets/icons/icon-150x150.png" target="Square150x150Logo" />
+		<icon src="www/assets/icons/icon-310x310.png" target="Square310x310Logo" />
+		<icon src="www/assets/icons/icon-310x150.png" target="Wide310x150Logo" />
+	</platform>
+	<platform name="electron">
+    <icon src="www/assets/icons/icon-192x192.png" target="app" />
+    <icon src="www/assets/icons/icon-512x512.png" target="installer" />
+</platform>
+</widget>
