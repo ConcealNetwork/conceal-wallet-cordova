@@ -22,3 +22,9 @@ Build Angular application into Cordova
 `ng build --configuration production --base-href . --output-path ..\cordova\www\`
 
 Run your app `cordova run <platform name>`
+
+##### Fixes
+
+- Fix for osx build on apple silicon `crdova platform add https://github.com/bpresles/cordova-osx.git#AppleSilicon`
+
+- Fix for file access on ios `cordova plugin add @globules-io/cordova-plugin-ios-xhr`
