@@ -16,7 +16,7 @@
     "@globules-io/cordova-plugin-ios-xhr": "^1.2.1",
     "cordova-android": "^9.1.0",
     "cordova-browser": "^6.0.0",
-    "cordova-electron": "^1.1.1",
+    "cordova-electron": "^2.0.0",
     "cordova-ios": "^6.2.0",
     "cordova-osx": "git+https://github.com/bpresles/cordova-osx.git#AppleSilicon",
     "cordova-plugin-splashscreen": "^6.0.0",
