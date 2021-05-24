@@ -100,7 +100,7 @@
 		<splash src="res/screen/windows/splashscreenphone.png" target="SplashScreenPhone"/>
 	</platform>
 	<platform name="electron">
-    <icon src="www/assets/icons/icon-192x192.png" target="app" />
-    <icon src="www/assets/icons/icon-512x512.png" target="installer" />
+    <icon src="res/icon/electron/icon-192x192.png" target="app" />
+    <icon src="res/icon/electron/icon-512x512.png" target="installer" />
 	</platform>
 </widget>
