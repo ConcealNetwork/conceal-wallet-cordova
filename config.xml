@@ -15,11 +15,19 @@
 	<allow-intent href="sms:*" />
 	<allow-intent href="mailto:*" />
 	<allow-intent href="geo:*" />
-	<preference name="ShowSplashScreenSpinner" value="false"/>
+	<!-- Android Preferences -->
 	<platform name="android">
 		<allow-intent href="market:*" />
 		<preference name="SplashMaintainAspectRatio" value="true"/>
-		<preference name="SplashShowOnlyFirstTime" value="true"/>
+		<preference name="SplashShowOnlyFirstTime" value="false"/>
+		<preference name="ShowSplashScreenSpinner" value="false"/>
+		<preference name="Fullscreen" value="false"/>
+		<preference name="StatusBarBackgroundColor" value="#111111"/>
+		<preference name="StatusBarStyle" value="lightcontent"/>
+		<preference name="NavigationBarBackgroundColor" value="#111111"/>
+		<preference name="NavigationBarLight" value="false"/>
+		<!-- Icons -->
+		<resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml"/>
 		<icon density="ldpi" src="res/icon/android/ldpi.png"/>
 		<icon density="mdpi" src="res/icon/android/mdpi.png"/>
 		<icon density="hdpi" src="res/icon/android/hdpi.png"/>
@@ -41,6 +49,7 @@
 		<splash density="land-xxhdpi" src="res/screen/android/splash-land-xxhdpi.png"/>
 		<splash density="land-xxxhdpi" src="res/screen/android/splash-land-xxxhdpi.png"/>
 	</platform>
+	<!-- iOS Preferences -->
 	<platform name="ios">
 		<allow-intent href="itms:*" />
 		<allow-intent href="itms-apps:*" />
@@ -88,6 +97,7 @@
 		<splash src="res/screen/ios/Default-Landscape~ipad.png" width="1024" height="768"/>
 		<splash src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
 	</platform>
+	<!-- Windows Preferences -->
 	<platform name="windows">
 		<icon src="res/icon/windows/storelogo.png" target="StoreLogo"/>
 		<icon src="res/icon/windows/smalllogo.png" target="Square30x30Logo"/>
@@ -99,6 +109,7 @@
 		<splash src="res/screen/windows/splashscreen.png" target="SplashScreen"/>
 		<splash src="res/screen/windows/splashscreenphone.png" target="SplashScreenPhone"/>
 	</platform>
+	<!-- Electron Preferences -->
 	<platform name="electron">
     <icon src="res/icon/electron/icon-192x192.png" target="app" />
     <icon src="res/icon/electron/icon-512x512.png" target="installer" />
