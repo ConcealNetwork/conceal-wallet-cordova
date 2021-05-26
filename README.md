@@ -27,4 +27,8 @@ Run your app `cordova run <platform name>`
 
 - Fix for osx build on apple silicon `crdova platform add https://github.com/bpresles/cordova-osx.git#AppleSilicon`
 
-- Fix for file access on ios `cordova plugin add @globules-io/cordova-plugin-ios-xhr`
+- Fix for file access on iOS `cordova plugin add @globules-io/cordova-plugin-ios-xhr`
+
+- Plugin for NavigationBar `cordova plugin add https://github.com/ollm/cordova-plugin-navigationbar.git`
+
+- Plugin for StatusBar `cordova plugin add cordova-plugin-statusbar`
