@@ -14,9 +14,9 @@
   "license": "MIT License",
   "devDependencies": {
     "@globules-io/cordova-plugin-ios-xhr": "^1.2.1",
-    "cordova-android": "^10.0.1",
+    "cordova-android": "^10.1.1",
     "cordova-browser": "^6.0.0",
-    "cordova-electron": "^2.0.0",
+    "cordova-electron": "^3.0.0",
     "cordova-ios": "^6.2.0",
     "cordova-osx": "git+https://github.com/bpresles/cordova-osx.git#AppleSilicon",
     "cordova-plugin-navigationbar-color": "git+https://github.com/ollm/cordova-plugin-navigationbar.git",
