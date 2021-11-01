@@ -25,7 +25,7 @@ Run your app `cordova run <platform name>`
 
 ##### Fixes
 
-- Fix for osx build on apple silicon `crdova platform add https://github.com/bpresles/cordova-osx.git#AppleSilicon`
+- Fix for osx build on apple silicon `cordova platform add https://github.com/bpresles/cordova-osx.git#AppleSilicon`
 
 - Fix for file access on iOS `cordova plugin add @globules-io/cordova-plugin-ios-xhr`
 
