@@ -34,12 +34,11 @@
       "cordova-plugin-navigationbar-color": {}
     },
     "platforms": [
-      "electron",
-      "browser",
-      "windows",
       "osx",
-      "ios",
-      "android"
+      "android",
+      "browser",
+      "electron",
+      "ios"
     ]
   }
 }
