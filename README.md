@@ -32,3 +32,5 @@ Run your app `cordova run <platform name>`
 - Plugin for NavigationBar `cordova plugin add https://github.com/ollm/cordova-plugin-navigationbar.git`
 
 - Plugin for StatusBar `cordova plugin add cordova-plugin-statusbar`
+
+<!-- - Cordova Clipboard API `cordova plugin add cordova-clipboard-api` -->
