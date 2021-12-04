@@ -17,15 +17,19 @@
 	<allow-intent href="geo:*" />
 	<!-- Android Preferences -->
 	<platform name="android">
-		<edit-config file="AndroidManifest.xml" target="application" mode="merge">
+		<!-- <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
 			<application android:usesCleartextTraffic="true" />
-		</edit-config>
-		<edit-config file="AndroidManifest.xml" target="uses-permission" mode="merge">
+		</edit-config> -->
+		<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/uses-permission">
 			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 			<uses-permission android:name="android.permission.READ_CLIPBOARD" />
 			<uses-permission android:name="android.permission.WRITE_CLIPBOARD" />
 		</edit-config>
 		<allow-intent href="market:*" />
+		<preference name="android-targetSdkVersion" value="30" />
+		<preference name="scheme" value="https" />
+		<preference name="hostname" value="hub.conceal.network" />
 		<preference name="SplashMaintainAspectRatio" value="true"/>
 		<preference name="SplashShowOnlyFirstTime" value="false"/>
 		<preference name="ShowSplashScreenSpinner" value="false"/>

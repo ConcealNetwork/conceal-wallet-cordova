@@ -20,8 +20,10 @@
     "cordova-electron": "^3.0.0",
     "cordova-ios": "^6.2.0",
     "cordova-osx": "git+https://github.com/bpresles/cordova-osx.git#AppleSilicon",
+    "cordova-plugin-advanced-http": "^3.2.2",
     "cordova-plugin-device": "^2.0.3",
-    "cordova-plugin-navigationbar-color": "git+https://github.com/ollm/cordova-plugin-navigationbar.git",
+    "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-navigationbar-color": "github:ollm/cordova-plugin-navigationbar",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-statusbar": "^3.0.0",
     "cordova-windows": "^7.0.1"
@@ -33,7 +35,10 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-navigationbar-color": {},
       "cordova-plugin-device": {},
-      "cordova-clipboard": {}
+      "cordova-clipboard": {},
+      "cordova-plugin-advanced-http": {
+        "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1"
+      }
     },
     "platforms": [
       "osx",
