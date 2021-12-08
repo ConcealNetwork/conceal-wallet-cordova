@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="app.conceal.hub" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 	<name>Conceal Hub</name>
 	<description>
 		The one application to rule them all.
@@ -8,6 +8,11 @@
 		Conceal Network
 	</author>
 	<content src="index.html" />
+
+	<!-- Cordova Hooks -->
+	<hook type="before_prepare" src="hooks/before_prepare/01_switch_configuration.js"/>
+
+	<!-- Access -->
 	<access origin="*" />
 	<allow-intent href="http://*/*" />
 	<allow-intent href="https://*/*" />
@@ -15,25 +20,26 @@
 	<allow-intent href="sms:*" />
 	<allow-intent href="mailto:*" />
 	<allow-intent href="geo:*" />
+
 	<!-- Android Preferences -->
 	<platform name="android">
-		<!-- <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
-			<application android:usesCleartextTraffic="true" />
-		</edit-config> -->
+		<!-- Permissions -->
+		<allow-intent href="market:*"/>
 		<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/uses-permission">
 			<uses-permission android:name="android.permission.INTERNET" />
-			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-			<uses-permission android:name="android.permission.READ_CLIPBOARD" />
-			<uses-permission android:name="android.permission.WRITE_CLIPBOARD" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+			<uses-permission android:name="android.permission.READ_CLIPBOARD"/>
+			<uses-permission android:name="android.permission.WRITE_CLIPBOARD"/>
 		</edit-config>
-		<allow-intent href="market:*" />
-		<preference name="android-targetSdkVersion" value="30" />
+		<!-- Preferences -->
+		<preference name="android-targetSdkVersion" value="30"/>
 		<preference name="scheme" value="https" />
-		<preference name="hostname" value="hub.conceal.network" />
+		<preference name="hostname" value="hub.conceal.network"/>
 		<preference name="SplashMaintainAspectRatio" value="true"/>
 		<preference name="SplashShowOnlyFirstTime" value="false"/>
 		<preference name="ShowSplashScreenSpinner" value="false"/>
 		<preference name="Fullscreen" value="false"/>
+		<preference name="StatusBarOverlaysWebView" value="false" />
 		<preference name="StatusBarBackgroundColor" value="#111111"/>
 		<preference name="StatusBarStyle" value="lightcontent"/>
 		<preference name="NavigationBarBackgroundColor" value="#111111"/>
@@ -61,6 +67,7 @@
 		<splash density="land-xxhdpi" src="res/screen/android/splash-land-xxhdpi.png"/>
 		<splash density="land-xxxhdpi" src="res/screen/android/splash-land-xxxhdpi.png"/>
 	</platform>
+
 	<!-- iOS Preferences -->
 	<platform name="ios">
 		<allow-intent href="itms:*" />
@@ -109,6 +116,7 @@
 		<splash src="res/screen/ios/Default-Landscape~ipad.png" width="1024" height="768"/>
 		<splash src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
 	</platform>
+
 	<!-- Windows Preferences -->
 	<platform name="windows">
 		<icon src="res/icon/windows/storelogo.png" target="StoreLogo"/>
@@ -121,9 +129,11 @@
 		<splash src="res/screen/windows/splashscreen.png" target="SplashScreen"/>
 		<splash src="res/screen/windows/splashscreenphone.png" target="SplashScreenPhone"/>
 	</platform>
+
 	<!-- Electron Preferences -->
 	<platform name="electron">
-    <icon src="res/icon/electron/icon-192x192.png" target="app" />
-    <icon src="res/icon/electron/icon-512x512.png" target="installer" />
+    <icon src="res/icon/electron/icon-192x192.png" target="app"/>
+    <icon src="res/icon/electron/icon-512x512.png" target="installer"/>
 	</platform>
+
 </widget>
