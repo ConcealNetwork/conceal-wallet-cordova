@@ -132,6 +132,7 @@
 
 	<!-- Electron Preferences -->
 	<platform name="electron">
+		<preference name="ElectronSettingsFilePath" value="res/electron/settings.json" />
     <icon src="res/icon/electron/icon-192x192.png" target="app"/>
     <icon src="res/icon/electron/icon-512x512.png" target="installer"/>
 	</platform>
