@@ -1,10 +1,14 @@
-# Apache Cordova
+# Conceal Hub Cordova
 
-### Mobile apps with HTML, CSS &amp; JS Target multiple platforms with one code base
+Access the entire Conceal Privacy Ecosystem in one simple and intuitive app.
+
+## Install
 
 Install Cordova `npm install -g cordova`
 
 Add required platforms `cordova platform add <platform name>`
+
+## Configure
 
 Configure Each Platform:
 
@@ -19,11 +23,21 @@ Configure Each Platform:
 - **Electron**  https://cordova.apache.org/docs/en/10.x/guide/platforms/electron/index.html
 
 Build Angular application into Cordova
-`ng build --configuration production --base-href . --output-path ..\cordova\www\`
+`ng build --configuration production --base-href . --output-path ..\conceal-hub-cordova\www\`
 
-Run your app `cordova run <platform name>`
+## Development
 
-##### Fixes
+Run `cordova run <platform name>`
+
+## Build Testing
+
+Run `cordova build android --prod`
+
+## Build Release
+
+Run `cordova build android --prod --release`
+
+##### Plugins
 
 - Fix for osx build on apple silicon `cordova platform add https://github.com/bpresles/cordova-osx.git#AppleSilicon`
 
@@ -32,5 +46,3 @@ Run your app `cordova run <platform name>`
 - Plugin for NavigationBar `cordova plugin add https://github.com/ollm/cordova-plugin-navigationbar.git`
 
 - Plugin for StatusBar `cordova plugin add cordova-plugin-statusbar`
-
-<!-- - Cordova Clipboard API `cordova plugin add cordova-clipboard-api` -->

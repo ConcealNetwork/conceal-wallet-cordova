@@ -1,10 +1,20 @@
 {
-	"electron": {
-		"windows": {
-			"package": [
-				"portable",
-				"msi"
-			]
+	"android": {
+		"debug": {
+			"keystore": "./keys/upload-keystore.jks",
+			"storePassword": "PmnyrHutZ3jjRFdPExqmF",
+			"alias": "upload",
+			"password" : "zM2DHnQ6GWeW4cPrLQ9Bm",
+			"keystoreType": "PKCS12",
+			"packageType": "apk"
+		},
+		"release": {
+			"keystore": "./keys/upload-keystore.jks",
+			"storePassword": "PmnyrHutZ3jjRFdPExqmF",
+			"alias": "upload",
+			"password" : "zM2DHnQ6GWeW4cPrLQ9Bm",
+			"keystoreType": "PKCS12",
+			"packageType": "bundle"
 		}
 	}
 }
