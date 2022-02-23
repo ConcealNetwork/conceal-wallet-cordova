@@ -1,4 +1,4 @@
-# Conceal Hub Cordova
+# Conceal App Cordova
 
 Access the entire Conceal Privacy Ecosystem in one simple and intuitive app.
 
@@ -23,7 +23,7 @@ Configure Each Platform:
 - **Electron**  https://cordova.apache.org/docs/en/10.x/guide/platforms/electron/index.html
 
 Build Angular application into Cordova
-`ng build --configuration production --base-href . --output-path ..\conceal-hub-cordova\www\`
+`ng build --configuration production --base-href . --output-path ..\conceal-app-cordova\www\`
 
 ## Development
 

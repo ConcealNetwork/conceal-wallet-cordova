@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="app.conceal.hub" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-	<name>Conceal Hub</name>
+<widget id="app.conceal" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>Conceal App</name>
 	<description>
 		The one application to rule them all.
 	</description>
@@ -34,7 +34,7 @@
 		<!-- Preferences -->
 		<preference name="android-targetSdkVersion" value="30"/>
 		<preference name="scheme" value="https" />
-		<preference name="hostname" value="hub.conceal.network"/>
+		<preference name="hostname" value="app.conceal.network"/>
 		<preference name="SplashMaintainAspectRatio" value="true"/>
 		<preference name="SplashShowOnlyFirstTime" value="false"/>
 		<preference name="ShowSplashScreenSpinner" value="false"/>

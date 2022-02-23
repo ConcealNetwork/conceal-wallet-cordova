@@ -1,9 +1,9 @@
 {
-  "name": "conceal-hub-cordova",
-  "displayName": "Conceal Hub",
-  "version": "1.0.0",
+  "name": "conceal-app-cordova",
+  "displayName": "Conceal App",
+  "version": "1.2.0",
   "description": "Access the entire Conceal Privacy Ecosystem in one simple and intuitive app.",
-  "homepage": "https://github.com/ConcealNetwork/conceal-hub-cordova",
+  "homepage": "https://github.com/ConcealNetwork/conceal-app-cordova",
   "author": {
     "name": "Conceal Network",
     "email": "ccx@conceal.network"
