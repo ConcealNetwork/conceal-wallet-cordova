@@ -34,7 +34,7 @@
 		<!-- Preferences -->
 		<preference name="android-targetSdkVersion" value="30"/>
 		<preference name="scheme" value="https" />
-		<preference name="hostname" value="app.conceal.network"/>
+		<preference name="hostname" value="app.conceal.hub"/>
 		<preference name="SplashMaintainAspectRatio" value="true"/>
 		<preference name="SplashShowOnlyFirstTime" value="false"/>
 		<preference name="ShowSplashScreenSpinner" value="false"/>
