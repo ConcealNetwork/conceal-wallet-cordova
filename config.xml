@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="app.conceal.hub" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-	<name>Conceal App</name>
+<widget id="app.conceal.wallet" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>Conceal Web Wallet</name>
 	<description>
-		The one application to rule them all.
+		THE SIMPLEST WAY TO USE CONCEAL – ANYWHERE AND ANY TIME
 	</description>
 	<author email="ccx@conceal.network" href="https://conceal.network">
 		Conceal Network
@@ -36,7 +36,7 @@
 		<preference name="AndroidPersistentFileLocation" value="Compatibility" />
 		<preference name="AndroidXEnabled" value="true" />
 		<preference name="scheme" value="https" />
-		<preference name="hostname" value="conceal-hub.web.app" />
+		<preference name="hostname" value="wallet.conceal.network" />
     <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splashscreen.xml" />
     <preference name="AndroidWindowSplashScreenBackground" value="#333333" />
 		<preference name="Fullscreen" value="false"/>

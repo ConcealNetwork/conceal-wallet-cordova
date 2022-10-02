@@ -1,9 +1,9 @@
 {
-  "name": "conceal-app-cordova",
-  "displayName": "Conceal App",
+  "name": "conceal-wallet-cordova",
+  "displayName": "Conceal wallet",
   "version": "2.0.0",
   "description": "Access the entire Conceal Privacy Ecosystem in one simple and intuitive app.",
-  "homepage": "https://github.com/ConcealNetwork/conceal-app-cordova",
+  "homepage": "https://github.com/ConcealNetwork/conceal-wallet-cordova",
   "author": {
     "name": "Conceal Network",
     "email": "ccx@conceal.network"
@@ -37,6 +37,8 @@
         "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1"
       }
     },
-    "platforms": []
+    "platforms": [
+      "android"
+    ]
   }
 }
