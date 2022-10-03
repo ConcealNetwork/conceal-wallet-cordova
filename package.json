@@ -1,8 +1,8 @@
 {
   "name": "conceal-wallet-cordova",
-  "displayName": "Conceal wallet",
-  "version": "2.0.0",
-  "description": "Access the entire Conceal Privacy Ecosystem in one simple and intuitive app.",
+  "displayName": "Conceal Mobile",
+  "version": "4.0.0",
+  "description": "THE SIMPLEST WAY TO USE CONCEAL – ANYWHERE AND ANY TIME",
   "homepage": "https://github.com/ConcealNetwork/conceal-wallet-cordova",
   "author": {
     "name": "Conceal Network",

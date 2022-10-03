@@ -1,33 +1,32 @@
-# Conceal App Cordova
+# Conceal Wallet Cordova
 
-Access the entire Conceal Privacy Ecosystem in one simple and intuitive app.
+THE SIMPLEST WAY TO USE CONCEAL – ANYWHERE AND ANY TIME
 
 ## Install
 
 Install Cordova `npm install -g cordova`
 
-Add required platforms `cordova platform add <platform name>`
+Add required platforms `cordova platform add android@latest`
 
 ## Configure
 
 Configure Each Platform:
 
-- **Android** https://cordova.apache.org/docs/en/10.x/guide/platforms/android/index.html
+- **Android** https://cordova.apache.org/docs/en/11.x/guide/platforms/android/index.html
 
-- **iOS** https://cordova.apache.org/docs/en/10.x/guide/platforms/ios/index.html
+- **iOS** https://cordova.apache.org/docs/en/11.x/guide/platforms/ios/index.html
 
-- **Windows** https://cordova.apache.org/docs/en/10.x/guide/platforms/windows/index.html
+- **Windows** https://cordova.apache.org/docs/en/11.x/guide/platforms/windows/index.html
 
-- **OSx** https://cordova.apache.org/docs/en/10.x/guide/platforms/osx/index.html
+- **OSx** https://cordova.apache.org/docs/en/11.x/guide/platforms/osx/index.html
 
-- **Electron**  https://cordova.apache.org/docs/en/10.x/guide/platforms/electron/index.html
-
-Build Angular application into Cordova
-`ng build --configuration production --base-href . --output-path ..\conceal-app-cordova\www\`
+- **Electron**  https://cordova.apache.org/docs/en/11.x/guide/platforms/electron/index.html
 
 ## Development
 
 Run `cordova run <platform name>`
+
+Run android with target `cordova run android --target=API_32`
 
 ## Build Testing
 
