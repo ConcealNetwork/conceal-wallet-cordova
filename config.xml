@@ -10,7 +10,7 @@
 	<content src="index.html" />
 
 	<!-- Cordova Hooks -->
-	<hook type="before_prepare" src="hooks/before_prepare/01_switch_configuration.js"/>
+	<!-- <hook type="before_prepare" src="hooks/before_prepare/01_switch_configuration.js"/> -->
 
 	<!-- Access -->
 	<access origin="*" />
