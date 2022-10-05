@@ -7,3 +7,4 @@ node_modules/
 /plugins/
 /platforms/
 /build.json
+/keys/upload-keystore.jks
