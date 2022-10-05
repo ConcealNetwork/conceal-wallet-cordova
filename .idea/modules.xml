@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/conceal-app-cordova.iml" filepath="$PROJECT_DIR$/.idea/conceal-app-cordova.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/conceal-wallet-cordova.iml" filepath="$PROJECT_DIR$/.idea/conceal-wallet-cordova.iml" />
     </modules>
   </component>
 </project>
