@@ -2,24 +2,17 @@
 <widget id="app.conceal.wallet" version="4.0.0" android-versionCode="40" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 	<name>Conceal Mobile</name>
 	<description>
-		THE SIMPLEST WAY TO USE CONCEAL – ANYWHERE AND ANY TIME
+		THE SIMPLEST WAY TO USE CONCEAL, ANYWHERE AND ANY TIME
 	</description>
 	<author email="ccx@conceal.network" href="https://conceal.network">
 		Conceal Network
 	</author>
 	<content src="index.html" />
 
-	<!-- Cordova Hooks -->
-	<!-- <hook type="before_prepare" src="hooks/before_prepare/01_switch_configuration.js"/> -->
-
 	<!-- Access -->
 	<access origin="*" />
 	<allow-intent href="http://*/*" />
 	<allow-intent href="https://*/*" />
-	<allow-intent href="tel:*" />
-	<allow-intent href="sms:*" />
-	<allow-intent href="mailto:*" />
-	<allow-intent href="geo:*" />
 
 	<!-- Android Preferences -->
 	<platform name="android">
@@ -28,8 +21,6 @@
 		<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/uses-permission">
 			<uses-permission android:name="android.permission.INTERNET" />
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-			<uses-permission android:name="android.permission.READ_CLIPBOARD"/>
-			<uses-permission android:name="android.permission.WRITE_CLIPBOARD"/>
 		</edit-config>
 		<!-- Preferences -->
 		<preference name="android-targetSdkVersion" value="33"/>
@@ -53,75 +44,6 @@
 		<icon background="@color/background" density="xhdpi" foreground="res/icon/android/xhdpi-foreground.png" />
 		<icon background="@color/background" density="xxhdpi" foreground="res/icon/android/xxhdpi-foreground.png" />
 		<icon background="@color/background" density="xxxhdpi" foreground="res/icon/android/xxxhdpi-foreground.png" />
-	</platform>
-
-	<!-- iOS Preferences -->
-	<platform name="ios">
-		<allow-intent href="itms:*" />
-		<allow-intent href="itms-apps:*" />
-		<preference name="allowFileAccessFromFileURLs" value="true"/>
-		<preference name="allowUniversalAccessFromFileURLs" value="true"/>
-		<icon src="res/icon/ios/icon-1024.png" width="1024" height="1024"/>
-		<icon src="res/icon/ios/icon-small.png" width="29" height="29"/>
-		<icon src="res/icon/ios/icon-small@2x.png" width="58" height="58"/>
-		<icon src="res/icon/ios/icon-small@3x.png" width="87" height="87"/>
-		<icon src="res/icon/ios/icon-small-40.png" width="40" height="40"/>
-		<icon src="res/icon/ios/icon-small-40@2x.png" width="80" height="80"/>
-		<icon src="res/icon/ios/icon-small-40@3x.png" width="120" height="120"/>
-		<icon src="res/icon/ios/icon-small-50.png" width="50" height="50"/>
-		<icon src="res/icon/ios/icon-small-50@2x.png" width="100" height="100"/>
-		<icon src="res/icon/ios/icon.png" width="57" height="57"/>
-		<icon src="res/icon/ios/icon@2x.png" width="114" height="114"/>
-		<icon src="res/icon/ios/icon-60.png" width="60" height="60"/>
-		<icon src="res/icon/ios/icon-60@2x.png" width="120" height="120"/>
-		<icon src="res/icon/ios/icon-60@3x.png" width="180" height="180"/>
-		<icon src="res/icon/ios/icon-72.png" width="72" height="72"/>
-		<icon src="res/icon/ios/icon-72@2x.png" width="144" height="144"/>
-		<icon src="res/icon/ios/icon-76.png" width="76" height="76"/>
-		<icon src="res/icon/ios/icon-76@2x.png" width="152" height="152"/>
-		<icon src="res/icon/ios/icon-167.png" width="167" height="167"/>
-		<icon src="res/icon/ios/icon-83.5@2x.png" width="167" height="167"/>
-		<!--  Storyboard portrait  -->
-		<splash src="res/screen/ios/Default@2x~iphone~anyany.png"/>
-		<splash src="res/screen/ios/Default@2x~iphone~comany.png"/>
-		<splash src="res/screen/ios/Default@3x~iphone~anyany.png"/>
-		<splash src="res/screen/ios/Default@3x~iphone~comany.png"/>
-		<splash src="res/screen/ios/Default@2x~ipad~anyany.png"/>
-		<splash src="res/screen/ios/Default@2x~ipad~comany.png"/>
-		<!--  Storyboard landscape  -->
-		<splash src="res/screen/ios/Default@2x~iphone~comcom.png"/>
-		<splash src="res/screen/ios/Default@3x~iphone~anycom.png"/>
-		<!--  Legacy portrait  -->
-		<splash src="res/screen/ios/Default~iphone.png" width="320" height="480"/>
-		<splash src="res/screen/ios/Default@2x~iphone.png" width="640" height="960"/>
-		<splash src="res/screen/ios/Default-Portrait~ipad.png" width="768" height="1024"/>
-		<splash src="res/screen/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
-		<splash src="res/screen/ios/Default-568h@2x~iphone.png" width="640" height="1136"/>
-		<splash src="res/screen/ios/Default-667h.png" width="750" height="1334"/>
-		<splash src="res/screen/ios/Default-736h.png" width="1242" height="2208"/>
-		<!--  Legacy landscape  -->
-		<splash src="res/screen/ios/Default-Landscape~ipad.png" width="1024" height="768"/>
-		<splash src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
-	</platform>
-
-	<!-- Windows Preferences -->
-	<platform name="windows">
-		<icon src="res/icon/windows/storelogo.png" target="StoreLogo"/>
-		<icon src="res/icon/windows/smalllogo.png" target="Square30x30Logo"/>
-		<icon src="res/icon/windows/Square44x44Logo.png" target="Square44x44Logo"/>
-		<icon src="res/icon/windows/Square70x70Logo.png" target="Square70x70Logo"/>
-		<icon src="res/icon/windows/Square71x71Logo.png" target="Square71x71Logo"/>
-		<icon src="res/icon/windows/Square150x150Logo.png" target="Square150x150Logo"/>
-		<icon src="res/icon/windows/Square310x310Logo.png" target="Square310x310Logo"/>
-		<splash src="res/screen/windows/splashscreen.png" target="SplashScreen"/>
-		<splash src="res/screen/windows/splashscreenphone.png" target="SplashScreenPhone"/>
-	</platform>
-
-	<!-- Electron Preferences -->
-	<platform name="electron">
-		<preference name="ElectronSettingsFilePath" value="res/electron/settings.json" />
-    <icon src="res/icon/electron/icon-192x192.png" target="app"/>
-    <icon src="res/icon/electron/icon-512x512.png" target="installer"/>
 	</platform>
 
 </widget>
