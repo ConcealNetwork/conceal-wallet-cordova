@@ -7,24 +7,38 @@
 	<author email="ccx@conceal.network" href="https://conceal.network">
 		Conceal Network
 	</author>
-	<content src="index.html" />
 
-	<!-- Access -->
+	<!-- Allow Intent -->
+	<content src="index.html" />
 	<access origin="*" />
-	<allow-intent href="http://*/*" />
-	<allow-intent href="https://*/*" />
+  <allow-navigation href="https://wallet.conceal.network" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
 
 	<!-- Android Preferences -->
 	<platform name="android">
-		<!-- Permissions -->
+
+		<!-- Allow Intent -->
 		<allow-intent href="market:*"/>
-		<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/uses-permission">
-		</edit-config>
+
+		<!-- Android Permissions -->
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.READ_CLIPBOARD" />
+			<uses-permission android:name="android.permission.WRITE_CLIPBOARD"/>
+			<uses-permission android:name="android.permission.CAMERA" />
+			<uses-feature android:name="android.hardware.camera2" android:required="false" />
+			<uses-feature android:name="android.hardware.camera2.autofocus" android:required="false" />
+		</config-file>
+
 		<!-- Preferences -->
 		<preference name="android-targetSdkVersion" value="33"/>
 		<preference name="AndroidXEnabled" value="true" />
-		<preference name="scheme" value="https" />
-		<preference name="hostname" value="wallet.conceal.network" />
     <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splashscreen.xml" />
     <preference name="AndroidWindowSplashScreenBackground" value="#333333" />
 		<preference name="Fullscreen" value="false"/>
@@ -33,6 +47,7 @@
 		<preference name="StatusBarStyle" value="lightcontent"/>
 		<preference name="NavigationBarBackgroundColor" value="#111111"/>
 		<preference name="NavigationBarLight" value="false"/>
+
 		<!-- Icons -->
 		<resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml"/>
 		<icon background="@color/background" density="ldpi" foreground="res/icon/android/ldpi-foreground.png" />
@@ -41,6 +56,7 @@
 		<icon background="@color/background" density="xhdpi" foreground="res/icon/android/xhdpi-foreground.png" />
 		<icon background="@color/background" density="xxhdpi" foreground="res/icon/android/xxhdpi-foreground.png" />
 		<icon background="@color/background" density="xxxhdpi" foreground="res/icon/android/xxxhdpi-foreground.png" />
+
 	</platform>
 
 </widget>
