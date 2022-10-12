@@ -18,9 +18,7 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-advanced-http": {
-        "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1"
-      }
+      "cordova-plugin-android-permissions": {}
     },
     "platforms": [
       "android"
@@ -28,7 +26,6 @@
   },
   "devDependencies": {
     "cordova-android": "^11.0.0",
-    "cordova-plugin-advanced-http": "^3.3.1",
-    "cordova-plugin-file": "^7.0.0"
+    "cordova-plugin-android-permissions": "^1.1.4"
   }
 }
