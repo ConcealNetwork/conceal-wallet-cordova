@@ -16,7 +16,7 @@ Configure Platform:
 
 ## Development
 
-Run android with target `cordova run android --target=API_32`
+Run android with target `cordova run android --target=API_35`
 
 ## Build Testing
 
