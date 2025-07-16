@@ -1,66 +1,55 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ConcealNetwork.ConcealMobile" version="4.0.4" android-versionCode="44" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-	<name>Conceal Mobile</name>
-	<description>
+<widget android-versionCode="45" id="com.ConcealNetwork.ConcealMobile" version="5.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Conceal Mobile</name>
+    <description>
 		THE SIMPLEST WAY TO USE CONCEAL, ANYWHERE AND ANY TIME
 	</description>
-	<author email="ccx@conceal.network" href="https://conceal.network">
+    <author email="ccx@conceal.network" href="https://conceal.network">
 		Conceal Network
 	</author>
-
-	<!-- Allow Intent -->
-	<content src="index.html" />
-	<access origin="*" />
-  <allow-navigation href="https://wallet.conceal.network" />
-  <allow-intent href="http://*/*" />
-  <allow-intent href="https://*/*" />
-  <allow-intent href="tel:*" />
-  <allow-intent href="sms:*" />
-  <allow-intent href="mailto:*" />
-  <allow-intent href="geo:*" />
-
-	<!-- Android Preferences -->
-	<platform name="android">
-
-		<!-- Allow Intent -->
-		<allow-intent href="market:*"/>
-
-		<!-- Android Permissions -->
-		<config-file target="AndroidManifest.xml" parent="/*">
-			<uses-permission android:name="android.permission.INTERNET" />
-			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-			<uses-permission android:name="android.permission.READ_CLIPBOARD" />
-			<uses-permission android:name="android.permission.WRITE_CLIPBOARD"/>
-			<uses-permission android:name="android.permission.CAMERA" />
-			<uses-feature android:name="android.hardware.camera2" android:required="false" />
-			<uses-feature android:name="android.hardware.camera2.autofocus" android:required="false" />
-		</config-file>
-
-		<!-- Preferences -->
-		<preference name="android-targetSdkVersion" value="35"/>
-		<preference name="android-compileSdkVersion" value="35"/>
-		<preference name="android-buildToolsVersion" value="35.0.0"/>
-		<preference name="AndroidXEnabled" value="true" />
-		<preference name="android-suppressUnsupportedCompileSdk" value="35" />
-		<preference name="KeepRunning" value="true" />
-    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splashscreen.xml" />
-    <preference name="AndroidWindowSplashScreenBackground" value="#333333" />
-		<preference name="Fullscreen" value="false"/>
-		<preference name="StatusBarOverlaysWebView" value="false" />
-		<preference name="StatusBarBackgroundColor" value="#111111"/>
-		<preference name="StatusBarStyle" value="lightcontent"/>
-		<preference name="NavigationBarBackgroundColor" value="#111111"/>
-		<preference name="NavigationBarLight" value="false"/>
-
-		<!-- Icons -->
-		<resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml"/>
-		<icon background="@color/background" density="ldpi" foreground="res/icon/android/ldpi-foreground.png" />
-		<icon background="@color/background" density="mdpi" foreground="res/icon/android/mdpi-foreground.png" />
-		<icon background="@color/background" density="hdpi" foreground="res/icon/android/hdpi-foreground.png" />
-		<icon background="@color/background" density="xhdpi" foreground="res/icon/android/xhdpi-foreground.png" />
-		<icon background="@color/background" density="xxhdpi" foreground="res/icon/android/xxhdpi-foreground.png" />
-		<icon background="@color/background" density="xxxhdpi" foreground="res/icon/android/xxxhdpi-foreground.png" />
-
-	</platform>
-
+    <content src="src/index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.READ_CLIPBOARD" />
+            <uses-permission android:name="android.permission.WRITE_CLIPBOARD" />
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-feature android:name="android.hardware.camera2" android:required="false" />
+            <uses-feature android:name="android.hardware.camera2.autofocus" android:required="false" />
+        </config-file>
+        <preference name="android-targetSdkVersion" value="35" />
+        <preference name="android-compileSdkVersion" value="35" />
+        <preference name="android-buildToolsVersion" value="35.0.0" />
+        <preference name="AndroidXEnabled" value="true" />
+        <preference name="android-suppressUnsupportedCompileSdk" value="35" />
+        <preference name="KeepRunning" value="true" />
+        <preference name="DisallowOverscroll" value="true" />
+        <preference name="android-minSdkVersion" value="22" />
+        <preference name="android-maxSdkVersion" value="35" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splashscreen.xml" />
+        <preference name="AndroidWindowSplashScreenBackground" value="#333333" />
+        <preference name="Fullscreen" value="false" />
+        <preference name="StatusBarOverlaysWebView" value="false" />
+        <preference name="StatusBarBackgroundColor" value="#111111" />
+        <preference name="StatusBarStyle" value="lightcontent" />
+        <preference name="NavigationBarBackgroundColor" value="#111111" />
+        <preference name="NavigationBarLight" value="false" />
+        <resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml" />
+        <icon background="@color/background" density="ldpi" foreground="res/icon/android/ldpi-foreground.png" />
+        <icon background="@color/background" density="mdpi" foreground="res/icon/android/mdpi-foreground.png" />
+        <icon background="@color/background" density="hdpi" foreground="res/icon/android/hdpi-foreground.png" />
+        <icon background="@color/background" density="xhdpi" foreground="res/icon/android/xhdpi-foreground.png" />
+        <icon background="@color/background" density="xxhdpi" foreground="res/icon/android/xxhdpi-foreground.png" />
+        <icon background="@color/background" density="xxxhdpi" foreground="res/icon/android/xxxhdpi-foreground.png" />
+    </platform>
 </widget>
