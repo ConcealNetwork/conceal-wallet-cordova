@@ -573,8 +573,17 @@ define(["require", "exports", "../Storage", "../WalletWatchdog"], function (requ
                 tx_as_hex: rawTx,
                 do_not_relay: false
             }).then(function (transactions) {
-                if (!transactions.status || transactions.status !== 'OK')
-                    throw transactions;
+                if (!transactions.status || transactions.status !== 'OK') {
+                    // Create a better error message from the response
+                    var errorMessage = 'Transaction submission failed';
+                    if (transactions.status) {
+                        errorMessage += ' - Status: ' + transactions.status;
+                    }
+                    // Create a clean error object
+                    var error = new Error(errorMessage);
+                    error.originalResponse = transactions;
+                    throw error;
+                }
             });
         };
         BlockchainExplorerRpcDaemon.prototype.resolveOpenAlias = function (domain) {

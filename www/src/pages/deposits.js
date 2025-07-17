@@ -319,16 +319,48 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
                             return [4 /*yield*/, blockchainExplorer.getHeight()];
                         case 1:
                             blockchainHeight_2 = _a.sent();
+                            // Validate deposit amount
+                            if (amount < config.depositMinAmountCoin) {
+                                console.error('Invalid deposit amount:', amount, 'must be at least', config.depositMinAmountCoin);
+                                swal({
+                                    type: 'error',
+                                    title: i18n.t('sendPage.invalidAmountModal.title'),
+                                    text: i18n.t('depositsPage.createDeposit.amountError'),
+                                    confirmButtonText: 'OK'
+                                });
+                                return [2 /*return*/];
+                            }
+                            
                             amountToDeposit = new JSBigInt(amount).multiply(new JSBigInt(Math.pow(10, config.coinUnitPlaces)));
                             fee = new JSBigInt(config.coinFee);
                             neededAmount = amountToDeposit.add(fee);
                             if (neededAmount > wallet.availableAmount(blockchainHeight_2)) {
                                 console.log('Not enough money to deposit');
+                                swal({
+                                    type: 'error',
+                                    title: i18n.t('depositsPage.createDeposit.insufficientFunds'),
+                                    text: i18n.t('depositsPage.createDeposit.insufficientFundsMessage'),
+                                    confirmButtonText: 'OK'
+                                });
                                 return [2 /*return*/];
                             }
-                            termToDeposit = term > 12 ? 12 * config.depositMinTermBlock : term * config.depositMinTermBlock;
+                            // Validate deposit term
+                            if (term < config.depositMinTermMonth || term > config.depositMaxTermMonth) {
+                                console.error('Invalid deposit term:', term, 'must be between', config.depositMinTermMonth, 'and', config.depositMaxTermMonth);
+                                swal({
+                                    type: 'error',
+                                    title: i18n.t('depositsPage.createDeposit.termError'),
+                                    text: 'Invalid deposit term',
+                                    confirmButtonText: 'OK'
+                                });
+                                return [2 /*return*/];
+                            }
+                            
+                            termToDeposit = term * config.depositMinTermBlock;
                             destinationAddress = wallet.getPublicAddress();
                             mixinToSendWith = config.defaultMixin;
+                            
+
                             // Get all blocked deposit indices to filter randomOuts-------- <---------- WIP
                             /*const blockedIndex = this.deposits
                               .filter(deposit => deposit.getStatus(this.blockchainHeight) === 'Locked')
@@ -371,13 +403,38 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
                                     });
                                 }).catch(function (error) {
                                     console.error('Transaction creation error:', error);
+                                    
+                                    // Better error message extraction
+                                    var errorMessage = 'Unknown error occurred';
+                                    if (error instanceof Error) {
+                                        errorMessage = error.message;
+                                    } else if (typeof error === 'string') {
+                                        errorMessage = error;
+                                    } else if (error && typeof error === 'object') {
+                                        // Try to extract useful information from the error object
+                                        if (error.message) {
+                                            errorMessage = error.message;
+                                        } else if (error.error) {
+                                            errorMessage = error.error;
+                                        } else if (error.details) {
+                                            errorMessage = error.details;
+                                        } else {
+                                            // Try to stringify, but handle circular references
+                                            try {
+                                                errorMessage = JSON.stringify(error);
+                                            } catch (stringifyError) {
+                                                errorMessage = 'Transaction failed - please check your connection and try again';
+                                            }
+                                        }
+                                    }
+                                    
                                     // Wait a short moment to ensure all console logs are printed
                                     setTimeout(function () {
                                         swal({
                                             type: 'error',
                                             title: i18n.t('sendPage.transferExceptionModal.title'),
                                             html: i18n.t('sendPage.transferExceptionModal.content', {
-                                                details: error instanceof Error ? error.message : JSON.stringify(error)
+                                                details: errorMessage
                                             }),
                                             confirmButtonText: i18n.t('sendPage.transferExceptionModal.confirmText'),
                                         });
@@ -387,20 +444,36 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
                             }).catch(function (error) {
                                 //console.log(error);
                                 if (error && error !== '') {
-                                    if (typeof error === 'string')
-                                        swal({
-                                            type: 'error',
-                                            title: i18n.t('sendPage.transferExceptionModal.title'),
-                                            html: i18n.t('sendPage.transferExceptionModal.content', { details: error }),
-                                            confirmButtonText: i18n.t('sendPage.transferExceptionModal.confirmText'),
-                                        });
-                                    else
-                                        swal({
-                                            type: 'error',
-                                            title: i18n.t('sendPage.transferExceptionModal.title'),
-                                            html: i18n.t('sendPage.transferExceptionModal.content', { details: JSON.stringify(error) }),
-                                            confirmButtonText: i18n.t('sendPage.transferExceptionModal.confirmText'),
-                                        });
+                                    // Better error message extraction
+                                    var errorMessage = 'Unknown error occurred';
+                                    if (error instanceof Error) {
+                                        errorMessage = error.message;
+                                    } else if (typeof error === 'string') {
+                                        errorMessage = error;
+                                    } else if (error && typeof error === 'object') {
+                                        // Try to extract useful information from the error object
+                                        if (error.message) {
+                                            errorMessage = error.message;
+                                        } else if (error.error) {
+                                            errorMessage = error.error;
+                                        } else if (error.details) {
+                                            errorMessage = error.details;
+                                        } else {
+                                            // Try to stringify, but handle circular references
+                                            try {
+                                                errorMessage = JSON.stringify(error);
+                                            } catch (stringifyError) {
+                                                errorMessage = 'Transaction failed - please check your connection and try again';
+                                            }
+                                        }
+                                    }
+                                    
+                                    swal({
+                                        type: 'error',
+                                        title: i18n.t('sendPage.transferExceptionModal.title'),
+                                        html: i18n.t('sendPage.transferExceptionModal.content', { details: errorMessage }),
+                                        confirmButtonText: i18n.t('sendPage.transferExceptionModal.confirmText'),
+                                    });
                                 }
                             });
                             return [3 /*break*/, 4];
