@@ -10,3 +10,6 @@ node_modules/
 /keys/upload-keystore.jks
 /keys/release-keystore.jks
 /builds/
+
+# F-Droid build artifacts
+conceal-mobile-*.apk

@@ -1,0 +1,76 @@
+Categories:
+  - Finance
+  - Internet
+License: MIT
+package_name: com.ConcealNetwork.ConcealMobile
+website: https://conceal.network
+source: https://github.com/ConcealNetwork/conceal-wallet-cordova
+issue_tracker: https://github.com/ConcealNetwork/conceal-wallet-cordova/issues
+changelog: https://github.com/ConcealNetwork/conceal-wallet-cordova/releases
+donate: https://wallet.conceal.network/#!donate
+Conceal: ccx7V4LeUXy2eZ9waDXgsLS7Uc11e2CpNSCWVdxEqSRFAm6P6NQhSb7XMG1D6VAZKmJeaJP37WYQg84zbNrPduTX2whZ5pacfj
+Monero: 41gW3g6qVxoTqRQAZwNpREfYntrmH31PvJLxKVfU7hGySukxB2YVMn3exzoEfV6pAy2GzubVKZpTrRfYJnMCrjG421e8WbY
+name: Conceal Mobile
+auto_name: Conceal Mobile
+summary: THE SIMPLEST WAY TO USE CONCEAL, ANYWHERE AND ANY TIME
+description: |
+    Conceal Mobile is the official mobile wallet for the Conceal Network blockchain.
+    
+    Features:
+    • Create and manage Conceal wallets
+    • Send and receive CCX transactions
+    • QR code scanning for easy transactions
+    • Secure wallet encryption
+    • Transaction history
+    • Network status monitoring
+    • Privacy-focused design
+    • Encrypted messaging
+    • Deposit and withdraw with Conceal Earn
+    
+    Conceal Network is a privacy-focused blockchain platform that provides secure,
+    private, and decentralized financial services.
+    
+    This app allows you to manage your Conceal (CCX) cryptocurrency with ease
+    and security, providing a simple interface for all your wallet needs.
+
+RepoType: git
+Repo: https://github.com/ConcealNetwork/conceal-wallet-cordova;branch=f-droid
+
+Screenshots:
+  - description: Main wallet interface showing balance and transaction history
+    thumb: Screenshots/main-wallet.png
+    default: Screenshots/main-wallet.png
+  - description: Send transaction screen with QR code scanning
+    thumb: Screenshots/send-transaction.png
+    default: Screenshots/send-transaction.png
+  - description: Receive screen with QR code for receiving CCX
+    thumb: Screenshots/receive-qr.png
+    default: Screenshots/receive-qr.png
+  - description: Settings and wallet management
+    thumb: Screenshots/settings.png
+    default: Screenshots/settings.png
+
+Builds:
+  - version_name: '5.0.0'
+    version_code: 46
+    commit: v5.0.0
+    subdir: app
+    gradle:
+      - yes
+    preassemble:
+      - echo "Building for F-Droid"
+    output: conceal-mobile-5.0.0.apk
+    srclibs:
+      - cordova-android@14.0.1
+      - cordova-plugin-android-permissions@1.1.4
+      - cordova-plugin-app-version@0.1.14
+      - cordova-plugin-camera@8.0.0
+      - cordova-plugin-insomnia@4.3.0
+      - cordova-plugin-network-information@3.0.0
+
+Icon: res/icon/android/xxxhpdi-foreground.png
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 5.0.0
+CurrentVersionCode: 46 

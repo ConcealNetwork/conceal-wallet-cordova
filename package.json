@@ -19,9 +19,7 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-android-permissions": {},
-      "cordova-plugin-camera": {
-        "ANDROIDX_CORE_VERSION": "1.6.+"
-      },
+      "cordova-plugin-camera": {},
       "cordova-plugin-insomnia": {},
       "cordova-plugin-app-version": {},
       "cordova-plugin-network-information": {}
@@ -38,4 +36,4 @@
     "cordova-plugin-insomnia": "~4.3.0",
     "cordova-plugin-network-information": "~3.0.0"
   }
-} 
+}

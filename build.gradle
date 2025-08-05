@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+// F-Droid specific build configuration
+task buildFdroid {
+    dependsOn ':platforms:android:app:assembleRelease'
+    
+    doLast {
+        // Copy the built APK to the expected location
+        def apkFile = file('platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk')
+        def targetFile = file('conceal-mobile-5.0.0.apk')
+        
+        if (apkFile.exists()) {
+            targetFile.parentFile.mkdirs()
+            apkFile.copyTo(targetFile, true)
+            println "APK copied to: ${targetFile.absolutePath}"
+        } else {
+            throw new GradleException("APK not found at: ${apkFile.absolutePath}")
+        }
+    }
+} 
