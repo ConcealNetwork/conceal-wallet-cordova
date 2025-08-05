@@ -379,6 +379,11 @@ define(["require", "exports", "./lib/numbersLab/Router", "./model/Mnemonic", "./
         handleGesture(event);
     }, false);
     var limit = 0.8; // Add this constant before handleGesture function
+    
+    // Copyright gesture variables
+    var copyrightHidden = false;
+    var copyrightTimeout = null;
+    
     function handleGesture(e) {
         var x = touchendX - touchstartX;
         var y = touchendY - touchstartY;
@@ -399,7 +404,10 @@ define(["require", "exports", "./lib/numbersLab/Router", "./model/Mnemonic", "./
             }
             else if (xy <= limit) {
                 if (y < 0) {
-                    //top
+                    //top - Show copyright if it's hidden (scroll up gesture) and at bottom of page
+                    if (copyrightHidden && copyrightView.isNative && isAtBottomOfPage()) {
+                        showCopyrightTemporarily();
+                    }
                 }
                 else {
                     //bottom
@@ -407,7 +415,56 @@ define(["require", "exports", "./lib/numbersLab/Router", "./model/Mnemonic", "./
             }
         }
         else {
+            if (y < 0) {
+                //top - Show copyright if it's hidden (scroll up gesture) and at bottom of page
+                if (copyrightHidden && copyrightView.isNative && isAtBottomOfPage()) {
+                    showCopyrightTemporarily();
+                }
+            }
             //tap
+        }
+    }
+    
+    // Function to check if user is at the bottom of the page
+    function isAtBottomOfPage() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var windowHeight = window.innerHeight;
+        var documentHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+        
+        // Consider "at bottom" if within 50 pixels of the bottom
+        return (scrollTop + windowHeight) >= (documentHeight - 50);
+    }
+    
+    // Function to show copyright temporarily
+    function showCopyrightTemporarily() {
+        var copyrightDiv = document.getElementById('copyright');
+        if (copyrightDiv) {
+            // Clear any existing timeout
+            if (copyrightTimeout) {
+                clearTimeout(copyrightTimeout);
+            }
+            
+            // Show the copyright
+            copyrightView.showCopyright = true;
+            copyrightDiv.style.opacity = '1';
+            copyrightDiv.style.zIndex = '1';
+            copyrightHidden = false;
+            
+            // Hide it again after 3 seconds
+            copyrightTimeout = setTimeout(function() {
+                copyrightDiv.style.opacity = '0';
+                copyrightDiv.style.zIndex = '-10';
+                setTimeout(function() {
+                    copyrightView.showCopyright = false;
+                    copyrightHidden = true;
+                }, 5000);
+            }, 3000);
         }
     }
     //Collapse the menu after clicking on a menu item
@@ -444,6 +501,8 @@ define(["require", "exports", "./lib/numbersLab/Router", "./model/Mnemonic", "./
                 _this.language = userLang;
             });
             _this.isNative = window.native;
+            _this.showCopyright = true;
+            
             return _this;
         }
         CopyrightView.prototype.languageWatch = function () {
@@ -456,6 +515,9 @@ define(["require", "exports", "./lib/numbersLab/Router", "./model/Mnemonic", "./
         __decorate([
             (0, VueAnnotate_1.VueVar)(false)
         ], CopyrightView.prototype, "isNative", void 0);
+        __decorate([
+            (0, VueAnnotate_1.VueVar)(true)
+        ], CopyrightView.prototype, "showCopyright", void 0);
         __decorate([
             (0, VueAnnotate_1.VueVar)('en')
         ], CopyrightView.prototype, "language", void 0);
@@ -484,6 +546,20 @@ define(["require", "exports", "./lib/numbersLab/Router", "./model/Mnemonic", "./
         window.native = true;
         copyrightView.isNative = true;
         $('body').addClass('native');
+        
+        // Hide copyright after 5 seconds for native apps
+        setTimeout(function() {
+            var copyrightDiv = document.getElementById('copyright');
+            if (copyrightDiv) {
+                copyrightDiv.style.opacity = '0';
+                copyrightDiv.style.zIndex = '-10';
+                // After fade out, hide the element
+                setTimeout(function() {
+                    copyrightView.showCopyright = false;
+                    copyrightHidden = true;
+                }, 5000);
+            }
+        }, 5000);
         
         console.log('📱 Cordova WebView detected - waiting for deviceready');
         

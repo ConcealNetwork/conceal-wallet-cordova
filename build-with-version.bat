@@ -7,6 +7,10 @@ echo ==============================
 REM Get version from config.xml
 for /f "tokens=2 delims=<>" %%a in ('findstr "version=" config.xml') do set VERSION=%%a
 
+REM Get java version
+set JAVA_VERSION=%JAVA_HOME%
+
+
 echo Version: %VERSION%
 echo.
 
@@ -20,7 +24,7 @@ if %ERRORLEVEL% EQU 0 (
     if not exist "builds" mkdir builds
     
     REM Define custom filename
-    set CUSTOM_FILENAME=Conceal_Mobile-v%VERSION%.apk
+    set CUSTOM_FILENAME=Conceal_Mobile-v%VERSION%-java%JAVA_VERSION%.apk
     
     REM Copy and rename the APK
     set SOURCE_APK=platforms\android\app\build\outputs\apk\release\app-release.apk

@@ -5,9 +5,21 @@
 # Get version from config.xml
 VERSION=$(grep -o 'version="[^"]*"' config.xml | cut -d'"' -f2)
 
+# Check if JAVA_HOME is set (from switch.sh)
+if [ -n "$JAVA_HOME" ]; then
+    export PATH=$JAVA_HOME/bin:$PATH
+    echo "Using JAVA_HOME: $JAVA_HOME"
+else
+    echo "⚠️  JAVA_HOME not set, using system Java"
+fi
+
+JAVA_VERSION=$(java -version 2>&1 | head -n 1 | cut -d'"' -f2 | cut -d'.' -f1)
+echo "Detected Java version: $JAVA_VERSION"
+
 echo "🚀 Building Conceal Wallet APK"
 echo "=============================="
 echo "Version: $VERSION"
+echo "Java Version: $JAVA_VERSION"
 echo ""
 
 # Build the APK
@@ -23,7 +35,7 @@ if [ $? -eq 0 ]; then
     mkdir -p $OUTPUT_DIR
     
     # Define custom filename
-    CUSTOM_FILENAME="Conceal_Mobile-v${VERSION}.apk"
+    CUSTOM_FILENAME="Conceal_Mobile-v${VERSION}-java${JAVA_VERSION}.apk"
     
     # Copy and rename the APK
     SOURCE_APK="platforms/android/app/build/outputs/apk/release/app-release.apk"
