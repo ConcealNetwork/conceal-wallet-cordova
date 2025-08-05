@@ -45,7 +45,10 @@ keytool -genkey -v -keystore keys/release-keystore.jks -alias conceal-mobile -ke
 	}
 }
 ```
-
+### Switch target SDK using
+```bash
+./switch.sh
+```
 
 ### Method 1: Standard Build
 ```bash

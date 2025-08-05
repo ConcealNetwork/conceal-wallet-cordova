@@ -23,7 +23,6 @@ if [ "$choice" = "1" ]; then
     rm -rf node_modules
     npm install
     cordova platform add android
-    cordova build android --release
 elif [ "$choice" = "2" ]; then
     # Use Java 11 for legacy builds (Gradle 7.1.1 requirement)
     export JAVA_HOME=/c/Program\ Files/Java/jdk-11
@@ -40,7 +39,6 @@ elif [ "$choice" = "2" ]; then
     rm -rf node_modules
     npm install
     cordova platform add android
-    cordova build android --release
 else
     echo "Invalid choice"
 fi
