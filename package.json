@@ -1,7 +1,7 @@
 {
   "name": "conceal-wallet-cordova",
   "displayName": "Conceal Mobile",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "THE SIMPLEST WAY TO USE CONCEAL – ANYWHERE AND ANY TIME",
   "homepage": "https://github.com/ConcealNetwork/conceal-wallet-cordova",
   "author": {
@@ -25,7 +25,7 @@
     ]
   },
   "devDependencies": {
-    "cordova-android": "^13.0.0",
+    "cordova-android": "^14.0.1",
     "cordova-plugin-android-permissions": "^1.1.4"
   }
 }

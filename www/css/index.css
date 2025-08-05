@@ -55,6 +55,21 @@ h1 {
 	text-align: center;
 }
 
+.version-info {
+	position: fixed;
+	bottom: 5%;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	font-size: 12px;
+	color: #888;
+	line-height: 1.4;
+}
+
+.version-info div {
+	margin: 2px 0;
+}
+
 a {
 	color:orange;
 	text-decoration: underline;

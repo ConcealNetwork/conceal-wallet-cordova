@@ -8,3 +8,5 @@ node_modules/
 /platforms/
 /build.json
 /keys/upload-keystore.jks
+/keys/release-keystore.jks
+/builds/
