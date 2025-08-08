@@ -1,4 +1,5 @@
 # Non-project-specific build files:
+
 # Ant builds
 ant-build
 ant-gen
@@ -6,6 +7,8 @@ ant-gen
 gen
 out
 # Gradle build artifacts
+
+/gradle
 /build
 /CordovaLib/build
 /app/build

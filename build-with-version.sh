@@ -24,7 +24,7 @@ echo ""
 
 # Build the APK
 echo "📱 Building Android APK..."
-cordova build android --prod --release
+cordova build android --release -- --packageType=apk
 
 # Check if build was successful
 if [ $? -eq 0 ]; then

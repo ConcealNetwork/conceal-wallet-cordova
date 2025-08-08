@@ -12,3 +12,6 @@ node_modules/
 
 # F-Droid build artifacts
 conceal-mobile-*.apk
+
+# fdroid setup
+/_not_for_fdroid_build.json
