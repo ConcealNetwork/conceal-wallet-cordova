@@ -97,20 +97,20 @@
   },
   "installed_plugins": {
     "cordova-plugin-android-permissions": {
-      "PACKAGE_NAME": "com.ConcealNetwork.ConcealMobile"
+      "PACKAGE_NAME": "com.concealnetwork.concealmobile"
     },
     "cordova-plugin-camera": {
       "ANDROIDX_CORE_VERSION": "1.6.+",
-      "PACKAGE_NAME": "com.ConcealNetwork.ConcealMobile"
+      "PACKAGE_NAME": "com.concealnetwork.concealmobile"
     },
     "cordova-plugin-insomnia": {
-      "PACKAGE_NAME": "com.ConcealNetwork.ConcealMobile"
+      "PACKAGE_NAME": "com.concealnetwork.concealmobile"
     },
     "cordova-plugin-app-version": {
-      "PACKAGE_NAME": "com.ConcealNetwork.ConcealMobile"
+      "PACKAGE_NAME": "com.concealnetwork.concealmobile"
     },
     "cordova-plugin-network-information": {
-      "PACKAGE_NAME": "com.ConcealNetwork.ConcealMobile"
+      "PACKAGE_NAME": "com.concealnetwork.concealmobile"
     }
   },
   "dependent_plugins": {},

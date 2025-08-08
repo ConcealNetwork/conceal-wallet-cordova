@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.ConcealNetwork.ConcealMobile;
+package com.concealnetwork.concealmobile;
 
 import android.os.Bundle;
 
