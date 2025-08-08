@@ -1,0 +1,725 @@
+{
+  "website": {
+    "title": "Гаманець Карбованця",
+    "description": "Офіційний онлайн гаманець криптовалюти Карбованець - анонімний, надійний, працює повністю у вашому браузері для найвищої безпеки"
+  },
+  "messages": {
+    "menu": {
+      "home": "Огляд",
+      "account": "Огляд",
+      "send": "Надіслати",
+      "receive": "Отримати",
+      "message": "Messages",
+      "deposit": "Deposits",
+      "export": "Експорт",
+      "donate": "Пожертвувати",
+      "settings": "Налаштування",
+      "disconnect": "Відключитися",
+      "network": "Статистика мережі",
+      "mining": "Майнінг"
+    },
+    "global": {
+      "loading": "Триває завантаження",
+      "disableSecurity": "Відключити цю пересторогу, я розумію ризик",
+      "passwordInvalidRequirements": "Пароль повинен складатися принаймні з 8 символів - 1 великої літери, 1 маленької, одного числа, одного спецсимвола",
+      "passwordConfirmationNotMatching": "Підтвердження пароля не збігається з першим",
+      "download": "Завантажити",
+      "confirmText": "OK",
+      "error": "Помилка",
+      "newVersionModal": {
+        "title": "Є нова версія",
+        "content": "Хочете перезавантажити щоб оновити версію?",
+        "confirmText": "Так",
+        "cancelText": "Назад"
+      },
+      "openWalletModal": {
+        "title": "Пароль гаманця",
+        "confirmText": "Відкрити",
+        "cancelText": "Скасувати",
+        "forgotPassword": "Забули пароль?"
+      },
+      "invalidPasswordModal": {
+        "title": "Ой...",
+        "content": "Здається пароль невірний",
+        "confirmText": "Гаразд"
+      },
+      "invalidMnemonicModal": {
+        "title": "Ой...",
+        "content": "Фраза для відновлення невірна",
+        "confirmText": "Гаразд"
+      },
+      "passwordNotComplexEnoughModal": {
+        "title": "Пароль недостатньо складний",
+        "confirmText": "Гаразд"
+      },
+      "permissionRequiredForCameraModal": {
+        "title": "Ой...",
+        "content": "Потрібен дозвіл на доступ до камери для сканування QR коду",
+        "confirmText": "Гаразд"
+      },
+      "optimize": {
+        "label": "Оптимізація",
+        "subtitle": "Ваш гаманець потребує оптимізації",
+        "button": "Оптимізувати зараз",
+        "loadingText": "Оптимізація, будь ласка, зачекайте...",
+        "success": "Оптимізація пройшла успішно",
+        "error": "Ошибка при оптимизации",
+        "errorInfo": "Оптимизация отменена",
+        "confirmText": "да"
+      }
+    },
+    "bottom": {
+      "termsOfUse": "Умови використання",
+      "privacyPolicy": "Політика конфіденційності",
+      "support": "Допомога",
+      "donate": "Пожертвувати",
+      "network": "Мережа",
+      "miningPool": "Майнінг",
+      "github": "GitHub"
+    },
+    "homepage": {
+      "mainTitle": "Ласкаво просимо в гаманець Карбованця",
+      "tagLine": "Найпростіший спосіб використання карбованців – в будь-який час, в будь-якому місці",
+      "actions": {
+        "loadWallet": "Завантажити мій гаманець",
+        "importWallet": "Імпортувати гаманець",
+        "create": "Створити",
+        "createWallet": "Створити гаманець"
+      },
+      "notes": {
+        "secure": {
+          "title": "Безпечний",
+          "description": "Повністю зашифрований!"
+        },
+        "fast": {
+          "title": "Доступний",
+          "description": "Працює в браузері!"
+        },
+        "technology": {
+          "title": "Локальний",
+          "description": "Ключі на вашому пристрої!"
+        },
+        "openSource": {
+          "title": "Open-source",
+          "description": "Хостинг на Github!"
+        }
+      }
+    },
+    "accountPage": {
+      "title": "Аккаунт",
+      "subtitle": "Огляд вашого профілю та історії транзакцій",
+      "synchronizingBlock": {
+        "text": "Синхронізація...",
+        "lastBlock": "Block",
+        "Queue": "Queue",
+        "Transactions": "Tx"
+      },
+      "balanceBlock": {
+        "title": "Ваш баланс",
+        "portfolio": "Портфолио",
+        "available": "Доступно",
+        "pending": "Ожидается",
+        "unlocked": "Откључано",
+        "deposited": "Заблокированные депозиты",
+        "withdrawable": "Выводимые средства",
+        "futureInterest": "Будущие проценты"
+      },
+      "historyBlock": {
+        "title": "Історія транзакцій",
+        "pendingTxStatus": "Очікується",
+        "emptyWallet": "У цьому гаманці поки немає коштів.",
+        "waitSync": "Будь ласка, зачекайте гаманець оновлює дані",
+        "beReallyPatient": "Початкова установка може зайняти деякий час...",
+        "getCoinAddress": "Отримати CCX",
+        "loadMoreBtn": "Завантажити більше"
+      },
+      "txDetails": {
+        "title": "Деталі транзакції",
+        "txHash": "Хеш",
+        "feesOnTx": "Комісія",
+        "blockHeight": "Висота блоку",
+        "paymentId": "Ідентифікатор платежу",
+        "txPrivKey": "Секретний ключ транзакції",
+        "message": "Повідомлення"
+      }
+    },
+    "changeWalletPasswordPage": {
+      "title": "Змінити ваш пароль",
+      "oldPassword": {
+        "label": "Старий пароль",
+        "invalid": "Пароль недійсний"
+      },
+      "newPassword": {
+        "label": "Виберіть новий пароль для захисту вашого гаманця"
+      },
+      "newPasswordConfirm": {
+        "label": "Підтвердіть новий пароль"
+      },
+      "confirm": "Змінити пароль",
+      "modalSuccess": {
+        "title": "Пароль змінений!",
+        "confirmText": "Гаразд"
+      }
+    },
+    "createWalletPage": {
+      "generatingStep": {
+        "title": "Створюється гаманець...",
+        "subtitle": "Майже готово",
+        "waitingMessage": "Генерується гаманець..."
+      },
+      "finalizationStep": {
+        "title": "Все. Ваш гаманець готовий!",
+        "subtitle": "Приготуйтеся використовувати Карбо як ніколи до цього",
+        "passwordSelectionBlock": {
+          "label": "Захистіть ваш гаманець"
+        },
+        "passwordConfirmBlock": {
+          "label": "Підтвердіть пароль"
+        },
+        "validPassword": "Використовувати цей пароль",
+        "backupBlock": {
+          "title": "Збережіть ваші приватні дані щоб мати можливість відновлення.",
+          "option1": "Опція 1: ",
+          "option2": "Опція 2: ",
+          "titlePdf": "Завантажити PDF",
+          "titleManualWrite": "Записати ключі",
+          "privateKeys": "Приватний ключ",
+          "mnemonicPhrase": "Мнемонічна фраза",
+          "separatorManualMethodsSolution": " або ",
+          "confirmManuallyWritten": "Я записав собі мнемонічну фразу",
+          "warningMessage": "**Hе втратьте!** Вона не може бути відновлена якщо ви її втратите.<br/>**Нікому не передавайте!** Ваші кошти можуть бути вкрадені якщо скористаєтеся цим файлом або фразою на шкідливому / фішинговому сайті.<br/>**Зробіть резервну копію!** Бережіть як мільйон доларів, якого воно може одного прекрасного дня коштувати.<br/>",
+          "finishButton": "Я зрозумів. Продовжити."
+        }
+      },
+      "disclaimerBlock": {
+        "title": "Ризики використання ConcealWallet",
+        "content": "ConcealWallet це веб-інтерфейс. Він допомагає вам використовувати Карбо без необхідності тримати повний вузол мережі Карбо. <br/>Ми рекомендуємо ставитися до ConcealWallet з усією серйозністю, як до вашого гаманця."
+      }
+    },
+    "donatePage": {
+      "title": "Пожертвувати",
+      "subtitle": "Допоможіть профінансувати розробку і оплату рахунків",
+      "webwalletBlock": {
+        "title": "Допомога Веб-гаманцю",
+        "content": "Якщо ви хочете підтримати розробку, допомогти з оплатою хостингу, якщо вам подобається аплікація, будь ласка зробіть пожертву: <br/><br/>"
+      },
+      "devFundBlock": {
+        "title": "Офіційний фонд Карбо",
+        "content": "Щоб підтримати Карбованець, ви можете зробити пожертвування на ці адреси"
+      }
+    },
+    "supportPage": {
+      "title": "Підтримка",
+      "subtitle": "Ми тут щоб допомогти!",
+      "getInTouchBlock": {
+        "title": "Зв'яжіться з нами!",
+        "content": "Якщо у вас виникли проблеми з гаманцем, напишіть нам!",
+        "discord": "Канал Conceal в Discord"
+      }
+    },
+    "forgotPasswordPage": {
+      "subtitle": "Як відновити доступ до гаманця",
+      "forgotPasswordBlock": {
+        "title": "Якщо ви забули пароль, скинути його неможливо!",
+        "content": "Єдиний спосіб відновити доступ до свого гаманця – це пригадати пароль або видалити дані гаманця з пам’яті браузера та відновити його з резервної копії (наприклад, мнемонічна фраза для відновлення).<br /> Якщо у вас є ключі гаманця або фраза відновлення, нижче ви можете видалити свій гаманець. Тоді ви зможете відновити його та синхронізувати з нуля.<br/> <strong>Перш ніж продовжити, переконайтеся, що у вас є фраза для відновлення!!!</strong>"
+      }
+    },
+    "networkPage": {
+      "title": "Статистика мережі",
+      "subtitle": "Огляд мережі Карбо",
+      "statsBlock": {
+        "connectNode": "Підключено до вузла",
+        "hashrate": "Хешрейт",
+        "height": "Висота блокчейну",
+        "difficulty": "Складність",
+        "lastTimeBlock": "Час останнього блоку",
+        "lastReward": "Нагорода за останній блок"
+      }
+    },
+    "sendPage": {
+      "title": "Надіслати CCX",
+      "syncing": {
+        "label": "Кошелек синхронизируется.... Когда он будет полностью синхронизирован, вы сможете отправлять средства."
+      },
+      "sendBlock": {
+        "address": {
+          "label": "Адреса одержувача",
+          "placeholder": "Вкажіть адресу, на яку хочете відправити кошти",
+          "invalid": "Адреса одержувача неправильна",
+          "fundsTo": "Кошти будуть відправлені на",
+          "receiver": "Одержувач",
+          "description": "Опис"
+        },
+        "amount": {
+          "label": "Сума",
+          "invalid": "Сума неправильна"
+        },
+        "paymentId": {
+          "label": "Payment ID (не обов'язково)",
+          "invalid": "Ідентифікатор платежу невірний. Довжина повинна бути 16 або 64 символи"
+        },
+        "message": {
+          "label": "Message (optional)",
+          "invalid": "The message is to long. Max length is 255 characters"
+        },
+        "mixin": {
+          "label": "Конфіденційність",
+          "invalid": "Міксін неправильный, має бути від 3 до 10 або нуль"
+        },
+        "sendButton": "Надіслати",
+        "cancelButton": "Скасувати"
+      },
+      "qrCodeScanning": {
+        "explication": "Сканувати QR код"
+      },
+      "notEnoughMoneyModal": {
+        "title": "Ой...",
+        "content": "У гаманці недостатньо коштів для здійснення цього перекладу",
+        "confirmText": "Гаразд"
+      },
+      "thankYouDonationModal": {
+        "title": "Спасибі за ваше пожертвування!",
+        "content": "Ми цінуємо вашу підтримку. <br/>Це пожертвування допоможе зробити Карбо краще",
+        "confirmText": "Гаразд"
+      },
+      "transferSentModal": {
+        "title": "Переказ успішно відправлений!",
+        "confirmText": "Гаразд"
+      },
+      "transferExceptionModal": {
+        "title": "Ой...",
+        "content": "Сталася помилка. Будь ласка повідомте про неї: {details}",
+        "confirmText": "Гаразд"
+      },
+      "invalidAmountModal": {
+        "title": "Ой...",
+        "content": "Неправильна сума",
+        "confirmText": "Гаразд"
+      },
+      "creatingTransferModal": {
+        "title": "Створюється переказ...",
+        "content": "Будь ласка зачекайте..."
+      },
+      "finalizingTransferModal": {
+        "title": "Завершується переказ...",
+        "content": "Будь ласка зачекайте..."
+      },
+      "confirmTransactionModal": {
+        "title": "Підтвердити переказ?",
+        "content": "Сума: {amount}<br/>Комісії: {fees}<br/>Всього: {total}",
+        "confirmText": "Підтвердити",
+        "cancelText": "Скасувати",
+        "remoteNodeFee": "Комісія вузла віддаленої мережі {fee} {symbol} додана до суми"
+      },
+      "waitingNfcModal": {
+        "title": "Очікування Nfc",
+        "content": "Піднесіть ближче до іншого пристрою"
+      }
+    },
+    "messagesPage": {
+      "title": "Сообщения",
+      "syncing": {
+        "label": "Кошелек синхронизируется.... Когда он будет полностью синхронизирован, вы сможете отправлять сообщения."
+      },
+      "tabs": {
+        "inbox": "Входящие",
+        "send": "Отправить"
+      },
+      "inboxBlock": {
+        "title": "Входящие сообщения"
+      },
+      "sendBlock": {
+        "address": {
+          "label": "Адреса одержувача",
+          "placeholder": "Вкажіть адресу, на яку хочете відправити кошти",
+          "invalid": "Адреса одержувача неправильна",
+          "fundsTo": "Кошти будуть відправлені на",
+          "receiver": "Одержувач",
+          "description": "Опис"
+        },
+        "message": {
+          "label": "Сообщение",
+          "invalid": "Сообщение слишком длинное. Максимальная длина 260 символов",
+          "preview": "Предварительный просмотр"
+        },
+        "ttl": {
+          "info": "TTL транзакция будет существовать только в mempool и автоматически уничтожится после {ttl}(часы:минуты). Она не будет добавлена в блок. Следовательно, сумма будет возвращена в кошелек."
+        },
+        "sendButton": "Надіслати",
+        "cancelButton": "Скасувати"
+      },
+      "qrCodeScanning": {
+        "explication": "Present the QR code"
+      },
+      "notEnoughMoneyModal": {
+        "title": "Oops...",
+        "content": "У гаманці недостатньо коштів для здійснення цього перекладу",
+        "confirmText": "OK"
+      },
+      "thankYouDonationModal": {
+        "title": "Спасибі за ваше пожертвування!",
+        "content": "Ми цінуємо вашу підтримку. <br/>Це пожертвування допоможе зробити Карбо краще",
+        "confirmText": "OK"
+      },
+      "transferSentModal": {
+        "title": "Сообщение успешно отправлено!",
+        "confirmText": "OK"
+      },
+      "transferExceptionModal": {
+        "title": "Oops...",
+        "content": "Сталася помилка. Будь ласка повідомте про неї: {details}",
+        "confirmText": "OK"
+      },
+      "invalidAmountModal": {
+        "title": "Oops...",
+        "content": "Неправильна сума",
+        "confirmText": "OK"
+      },
+      "creatingTransferModal": {
+        "title": "Створюється переказ...",
+        "content": "Будь ласка зачекайте..."
+      },
+      "finalizingTransferModal": {
+        "title": "Завершується переказ...",
+        "content": "Будь ласка зачекайте..."
+      },
+      "confirmTransactionModal": {
+        "title": "Підтвердити переказ?",
+        "content": "Сума: {amount}<br/>Комісії: {fees}<br/>Всього: {total}",
+        "confirmText": "Підтвердити",
+        "cancelText": "Скасувати"
+      },
+      "waitingNfcModal": {
+        "title": "Очікування Nfc",
+        "content": "Піднесіть ближче до іншого пристрою"
+      }
+    },
+    "depositsPage": {
+      "title": "Депозити",
+      "unlockDate": "Дата розблокування",
+      "interest": "Відсоток",
+      "deposit": "Депозит",
+      "lockHeight": "Висота блокування",
+      "unlockHeight": "Висота розблокування",
+      "depositDate": "Дата депозиту",
+      "syncing": {
+        "label": "Гаманець синхронізується.... Коли синхронізація буде завершена, ви зможете переглядати депозити."
+      },
+      "tabs": {
+        "inbox": "Депозити",
+        "send": "Створити"
+      },
+      "depositsBlock": {
+        "title": "Список депозитів"
+      },
+      "confirmDeposit": {
+        "title": "Підтвердити депозит",
+        "message": "Введіть ваш пароль для підтвердження створення депозиту {amount} CCX на {term} місяців?",
+        "confirm": "Створити депозит",
+        "cancel": "Скасувати",
+        "passwordRequired": "Пароль гаманця є обов'язковим"
+      },
+      "createDeposit": {
+        "title": "Створити новий депозит",
+        "amount": "Сума для депозиту",
+        "term": "Час блокування (в місяцях)",
+        "termError": "Будь ласка введіть ціле число від 1 до 12 місяців",
+        "confirm": "Створити депозит",
+        "cancel": "Скасувати",
+        "createSuccess": "Депозит надісланий на блокчейн",
+        "createPending": "Ваш депозит обробляється",
+        "createError": "Помилка при створенні депозиту",
+        "withdrawSuccess": "Виведення надіслано на блокчейн",
+        "withdrawPending": "Ваше виведення обробляється",
+        "withdrawError": "Помилка при виведенні депозиту",
+        "amountError": "Неправильна сума",
+        "amountMustBePositive": "Сума повинна бути позитивною",
+        "termMustBeValid": "Час повинен бути від 1 до 12 місяців",
+        "insufficientFunds": "Недостатньо коштів",
+        "insufficientFundsMessage": "У вас недостатньо коштів для створення цього депозиту",
+        "maxAmount": "Максимальна сума депозиту: {amount} CCX",
+        "rewardAtTerm": "Нагорода за термін: {reward} CCX"
+      },
+      "depositDetails": {
+        "title": "Деталі депозитів",
+        "txHash": "Транзакція створення",
+        "spendingTx": "Транзакція витрачання",
+        "status": "Статус",
+        "amount": "Сума",
+        "term": "Час блокування",
+        "creationTime": "Час створення",
+        "spendingTime": "Час витрачання",
+        "spendingHeight": "Висота витрачання",
+        "creationHeight": "Висота створення",
+        "unlockHeight": "Висота розблокування",
+        "interest": "Відсоток"
+      },
+      "recap": {
+        "title": "Deposits Recap",
+        "totalLifetimeDeposit": "Total Lifetime Deposit",
+        "totalLifetimeInterest": "Total Lifetime Interest",
+        "totalCashedOutInterest": "Total Cashed Out Interest",
+        "futureInterestLocked": "Future Interest on Locked Deposits",
+        "futureInterestUnlocked": "Future Interest on Withdrawable",
+        "earliestWithdrawable": "Earliest Withdrawable"
+      }
+    },
+    "receivePage": {
+      "title": "Отримати CCX",
+      "receiveBlock": {
+        "address": {
+          "title": "Ваша адреса для отримання:",
+          "label": "Дайте цю адресу щоб отримати кошти"
+        },
+        "qrCode": {
+          "title": "Або персоналізуйте QR код:",
+          "labelAmount": "Сума (не обов'язково)",
+          "labelRecipient": "Назва одержувача (не обов'язково)",
+          "labelDescription": "Опис транзакції (не обов'язково)",
+          "updateButton": "Оновити"
+        }
+      },
+      "qrBlock": {
+        "title": "Ваш персональний QR код"
+      },
+      "waitingNfcToWriteModal": {
+        "title": "Очікування Nfc",
+        "titleSuccess": "Nfc тег записано",
+        "content": "Піднесіть NFC тег ближче для запису"
+      },
+      "nfcErrorModal": {
+        "titleInsufficientCapacity": "Місткість тега недостатня"
+      }
+    },
+    "miningPage": {
+      "title": "Інформація про майнінг",
+      "subtitle": "Підтримайте мережу майнінгом і отримайте в нагороду CCX",
+      "parameterBlock": {
+        "title": "Параметри",
+        "labelDestinationAddress": "Гаманець на який майнити",
+        "labelThreads": "Кількість потоків (більше = вище швидкість)",
+        "start": "Старт",
+        "stop": "Стоп"
+      },
+      "statisticsBlocks": {
+        "title": "Статистика",
+        "validShares": "Валідні частки",
+        "hashrate": "Хешрейт",
+        "maxHashrate": "Макс. Хешрейт",
+        "dedicatedHardware": "Майнінг допомагає в децентралізації мережі і дозволяє вам заробити карбованці.",
+        "miningHandledBy": "Майнінг проходить на пулі pool.conceal.network"
+      }
+    },
+    "settingsPage": {
+      "title": "Налаштування",
+      "subtitle": "Тут ви можете змінити параметри",
+      "versionBlock": {
+        "versionNumber": "Номер версії: ",
+        "versionCode": "Код версії: "
+      },
+      "settingsBlock": {
+        "speed": {
+          "label": "Швидкість оновлення гаманця (споживатиме більше ресурсів)",
+          "fastest": "Найшвидша",
+          "fast": "Швидка",
+          "medium": "Середня",
+          "slow": "Повільна"
+        },
+        "language": {
+          "label": "Мова"
+        },
+        "readMinerTx": {
+          "label": "Зчитувати транзакції майнінгу (тільки для соло майнінгу)"
+        },
+        "customNode": {
+          "label": "Використовувати власний вузол"
+        },
+        "nodeUrl": {
+          "label": "Адреса URL вузла"
+        },
+        "ticker": {
+          "label": "Символ",
+          "full": "Повний символ",
+          "short": "Короткий символ",
+          "preview": "Перегляд"
+        }
+      },
+      "changePasswordButton": "Змінити пароль мого гаманця",
+      "deleteWalletButton": "Видалити мій гаманець (локальну копію)",
+      "resetWalletButton": "Reset and rescan wallet",
+      "walletSettings": {
+        "creationHeight": {
+          "label": "Висота створення гаманця"
+        },
+        "currentScanningHeight": {
+          "label": "Поточна висота сканування"
+        },
+        "updateButton": "Оновити"
+      },
+      "deleteWalletModal": {
+        "title": "Видалити мій гаманець (локальну копію)",
+        "content": "Ви ДІЙСНО впевнені що хочете видалити свій гаманець?",
+        "confirmText": "Так, я знаю що роблю",
+        "cancelText": "Скасувати"
+      },
+      "resetWalletModal": {
+        "title": "Reset My Wallet (local copy)",
+        "content": "Are you sure you really want to reset your wallet?",
+        "confirmText": "Yes I'm sure",
+        "cancelText": "Cancel"
+      },
+      "optimizeWalletModal": {
+        "title": "Nothing to do...",
+        "content": "Your wallet is already optimized.",
+        "confirmText": "OK"
+      }
+    },
+    "importBasePage": {
+      "parametersBlock": {
+        "title": "Параметри",
+        "password": {
+          "label": "Пароль для захисту вашого гаманця"
+        },
+        "passwordConfirm": {
+          "label": "Підтвердіть пароль",
+          "invalid": "Пароль не збігається з першим введенням паролем"
+        },
+        "importHeight": {
+          "label": "З якої висоти почати імпорт:"
+        }
+      }
+    },
+    "importFromQrPage": {
+      "title": "Імпортувати гаманець з QR коду",
+      "subtitle": "Імпортувати гаманець з офлайнової резервної копії",
+      "qrCodeBlock": {
+        "title": "QR код",
+        "startScanButton": "Почати сканування",
+        "importButton": "Імпортувати",
+        "scanSuccess": "QR код успішно скенований"
+      },
+      "qrScanningBlock": {
+        "title": "Наведіть на QR код"
+      },
+      "error": {
+        "title": "Помилка",
+        "connection": "Помилка з'єднання, спробуйте знову",
+        "init": "Помилка ініціалізації, спробуйте знову",
+        "confirmText": "OK"
+      }
+    },
+    "exportPage": {
+      "title": "Зробити резервну копію ваших даних",
+      "publicAddressBlock": {
+        "title": "Ваша публічна адреса"
+      },
+      "pdfBlock": {
+        "title": "Резервна копія PDF",
+        "downloadButton": "Завантажити"
+      },
+      "warningBlock": {
+        "title": "Увага",
+        "content": "Якщо ви вирішите зберегти приватні ключі або мнемонічну фразу, гаманець НЕ ЗБЕРЕЖЕ їх в текстовому вигляді для вашої безпеки.<br/>Файл є альтернативним рішенням де ваші ключі зашифровані і містить резервну копію всіх ваших транзакцій для прискорення синхронізації при відновленні."
+      },
+      "exportBlock": {
+        "title": "Експортувати сирі дані",
+        "privateKeysButton": "Отримати мої приватні ключі",
+        "mnemonicKeysButton": "Отримати мою мнемонічну фразу",
+        "fileButton": "Експортувати у файл"
+      },
+      "walletKeysModal": {
+        "title": "Приватні ключі",
+        "confirmText": "Гаразд",
+        "content": "Будь ласка поставтеся серйозно до збереження цих ключів. <b>Той хто їх має, володіє коштами на гаманці</b>!<br/>Ключ витрачання: {privSpendKey}<br/>Ключ стеження: {privViewKey}"
+      },
+      "mnemonicKeyModal": {
+        "title": "Мнемонічна фраза",
+        "confirmText": "Гаразд",
+        "content": "Будь ласка поставтеся серйозно до збереження цієї мнемонічною фрази. <b>Той хто її має, володіє коштами на гаманці</b> ! Фраза:<br/>{mnemonic}"
+      },
+      "mnemonicLangSelectionModal": {
+        "title": "Виберіть мову мнемонічної фрази",
+        "confirmText": "Експортувати"
+      }
+    },
+    "importPage": {
+      "title": "Створити гаманець",
+      "subtitle": "З раніше створених ключів, файлу або мнемонічною фрази",
+      "chooseMethod": "Виберіть метод імпорту:",
+      "fromKeys": "З ключів",
+      "fromFile": "З файлу",
+      "fromMnemonic": "З мнемонічної фрази",
+      "fromQr": "З QR коду"
+    },
+    "termsOfUsePage": {
+      "title": "Умови використання",
+      "subtitle": "Уважно їх прочитайте."
+    },
+    "privacyPolicyPage": {
+      "title": "Політика конфіденційності",
+      "subtitle": "Будь ласка, прочитайте уважно."
+    },
+    "importFromFilePage": {
+      "title": "Імпорт гаманця з резервного фала",
+      "subtitle": "Використати резервний файл для створення гаманця",
+      "walletBlock": {
+        "title": "Файл гаманця",
+        "label": "Виберіть файл",
+        "importButton": "Імпортувати"
+      }
+    },
+    "importFromMnemonicPage": {
+      "title": "Імпорт гаманця з мнемонічної фрази",
+      "subtitle": "Використати мнемонічну фразу для створення гаманця",
+      "mnemonicBlock": {
+        "title": "Мнемонічна фраза",
+        "mnemonic": {
+          "label": "Мнемонічна фраза: 25 слів",
+          "invalid": "Мнемонічна фраза неправильна",
+          "language": "Мова"
+        },
+        "importButton": "Імпортувати"
+      }
+    },
+    "importFromKeysPage": {
+      "title": "Імпорт гаманця з ключів",
+      "subtitle": "Використати приватні ключі для створення гаманця",
+      "parametersBlock": {
+        "viewOnlyWallet": {
+          "label": "Хочете створити гаманець стеження?"
+        }
+      },
+      "keysBlock": {
+        "titleNotViewOnly": "Ключі гаманця",
+        "titleViewOnly": "Гаманець стеження",
+        "privateSpend": {
+          "label": "Приватний ключ витрачання"
+        },
+        "privateView": {
+          "label": "Приватний ключ стеження"
+        },
+        "publicKey": {
+          "label": "Публічний ключ"
+        },
+        "importButton": "Імпортувати"
+      }
+    }
+  },
+  "number": {},
+  "date": {
+    "short": {
+      "year": "numeric",
+      "month": "short",
+      "day": "numeric"
+    },
+    "long": {
+      "year": "numeric",
+      "month": "short",
+      "day": "numeric",
+      "weekday": "short",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": true
+    }
+  }
+}
