@@ -1,6 +1,7 @@
 Categories:
   - Internet
   - Money
+  - Wallet
 License: MIT
 AuthorName: acktarius (Conceal Network Developer)
 AuthorEmail: acktarius@protonmail.com
@@ -11,38 +12,19 @@ Changelog: https://github.com/ConcealNetwork/conceal-wallet-cordova/releases
 Donate: https://wallet.conceal.network/#!donate
 
 AutoName: Conceal Mobile
-Description: |
-  Conceal Mobile is the official mobile wallet for the Conceal Network blockchain.
-  Features:
-  • Create and manage Conceal wallets
-  • Send and receive CCX transactions
-  • QR code scanning for easy transactions
-  • Secure wallet encryption
-  • Transaction history
-  • Network status monitoring
-  • Privacy-focused design
-  • Encrypted messaging
-  • Deposit and withdraw (Conceal Earn)
-  Conceal Network is a privacy-focused blockchain platform that provides secure,
-  private, and decentralized financial services.
-  This app allows you to manage your Conceal (CCX) cryptocurrency with ease
-  and security, providing a simple interface for all your wallet needs.
 
 RepoType: git
 Repo: https://github.com/ConcealNetwork/conceal-wallet-cordova
 
 Builds:
-  - versionName: 5.0.0
-    versionCode: 46
-    commit: 88ff3019a80804528ba78a74bd4c48e2a174fbc3
+  - versionName: 5.0.1
+    versionCode: 47
+    commit: v5.0.1-f-droid
     subdir: platforms/android/app
     gradle:
       - yes
-    output: build/outputs/apk/release/app-release-unsigned.apk
-    gradleprops:
-      - org.gradle.java.home=/usr/lib/jvm/java-21-openjdk-amd64
 
 AutoUpdateMode: None
 UpdateCheckMode: None
-CurrentVersion: 5.0.0
-CurrentVersionCode: 46
+CurrentVersion: 5.0.1
+CurrentVersionCode: 47

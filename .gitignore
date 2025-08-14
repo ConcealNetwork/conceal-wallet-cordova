@@ -14,4 +14,4 @@ node_modules/
 conceal-mobile-*.apk
 
 # fdroid setup
-/_not_for_fdroid_build.json
+not-build.json
