@@ -17,14 +17,14 @@ RepoType: git
 Repo: https://github.com/ConcealNetwork/conceal-wallet-cordova
 
 Builds:
-  - versionName: 5.0.1
-    versionCode: 47
-    commit: v5.0.1-f-droid
+  - versionName: 5.0.2
+    versionCode: 48
+    commit: v5.0.2-f-droid
     subdir: platforms/android/app
     gradle:
       - yes
 
 AutoUpdateMode: None
 UpdateCheckMode: None
-CurrentVersion: 5.0.1
-CurrentVersionCode: 47
+CurrentVersion: 5.0.2
+CurrentVersionCode: 48

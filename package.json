@@ -1,7 +1,7 @@
 {
   "name": "conceal-wallet-cordova",
   "displayName": "Conceal Mobile",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "THE SIMPLEST WAY TO USE CONCEAL – ANYWHERE AND ANY TIME",
   "homepage": "https://github.com/ConcealNetwork/conceal-wallet-cordova",
   "author": {
@@ -11,7 +11,7 @@
   "keywords": [
     "ecosystem:cordova"
   ],
-  "license": "MIT License",
+  "license": "BSD 3-Clause",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
