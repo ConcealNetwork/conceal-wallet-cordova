@@ -7,6 +7,10 @@ node_modules/
 /plugins/
 /platforms/
 /build.json
+/not-build.json
 /keys/upload-keystore.jks
 /keys/release-keystore.jks
 /builds/
+
+# For F-Droid
+/fastlane/*
