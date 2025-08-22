@@ -1,1 +1,0 @@
-Secure mobile client for the Conceal Network web wallet.
