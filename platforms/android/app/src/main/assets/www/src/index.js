@@ -196,24 +196,30 @@ function onDeviceReady() {
                 networkText.textContent = 'Network OK (' + reachableNodes + '/' + totalNodes + ')';
                 networkStatus.style.background = 'rgba(0,128,0,0.8)';
                 
-                // Hide after 3 seconds if network is good
-                setTimeout(function() {
-                    if (networkStatus) {
-                        networkStatus.style.display = 'none';
-                    }
-                }, 3000);
+                                 // Hide after 3 seconds if network is good
+                 setTimeout(function() {
+                     if (networkStatus) {
+                         networkStatus.style.display = 'none';
+                     }
+                 }, 3000);
             } else {
                 networkIcon.textContent = '❌';
                 networkText.textContent = 'No nodes reachable';
                 networkStatus.style.background = 'rgba(255,0,0,0.8)';
                 
-                // Retry once after 3 seconds if first attempt failed
-                if (!isRetry) {
-                    setTimeout(function() {
-                        console.log('🌐 Retrying network connectivity test...');
-                        testNetworkConnectivity(true);
-                    }, 3000);
-                }
+                                 // Retry once after 3 seconds if first attempt failed
+                 if (!isRetry) {
+                     setTimeout(function() {
+                         testNetworkConnectivity(true);
+                     }, 20000);
+                 } else {
+                     // If retry also failed, hide the status after 5 seconds
+                     setTimeout(function() {
+                         if (networkStatus) {
+                             networkStatus.style.display = 'none';
+                         }
+                     }, 5000);
+                 }
             }
         }
     }
@@ -223,6 +229,21 @@ function onDeviceReady() {
         if (window.config && window.config.nodeList) {
             var reachableNodes = 0;
             var totalNodes = window.config.nodeList.length;
+            var completedTests = 0;
+            
+            // If no nodes to test, show error immediately
+            if (totalNodes === 0) {
+                updateNetworkStatus(0, 0, isRetry);
+                return;
+            }
+            
+                         // Add a global timeout to ensure we don't wait forever
+             var globalTimeout = setTimeout(function() {
+                 if (completedTests < totalNodes) {
+                     completedTests = totalNodes;
+                     updateNetworkStatus(reachableNodes, totalNodes, isRetry);
+                 }
+             }, 15000); // 15 second global timeout
             
             window.config.nodeList.forEach(function(nodeUrl, index) {
                 fetch(nodeUrl + 'getinfo', { 
@@ -230,14 +251,24 @@ function onDeviceReady() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ jsonrpc: '2.0', id: 'test', method: 'getinfo', params: {} }),
                     timeout: 10000 // Increased timeout
-                }).then(function(response) {
-                    console.log('🌐 Node ' + (index + 1) + ' (' + nodeUrl + ') is reachable');
-                    reachableNodes++;
-                    updateNetworkStatus(reachableNodes, totalNodes, isRetry);
-                }).catch(function(error) {
-                    console.log('🌐 Node ' + (index + 1) + ' (' + nodeUrl + ') is not reachable:', error.message);
-                    updateNetworkStatus(reachableNodes, totalNodes, isRetry);
-                });
+                                 }).then(function(response) {
+                     reachableNodes++;
+                     completedTests++;
+                     
+                     // Only update status when all tests are complete
+                     if (completedTests === totalNodes) {
+                         clearTimeout(globalTimeout);
+                         updateNetworkStatus(reachableNodes, totalNodes, isRetry);
+                     }
+                 }).catch(function(error) {
+                     completedTests++;
+                     
+                     // Only update status when all tests are complete
+                     if (completedTests === totalNodes) {
+                         clearTimeout(globalTimeout);
+                         updateNetworkStatus(reachableNodes, totalNodes, isRetry);
+                     }
+                 });
             });
         }
     }
