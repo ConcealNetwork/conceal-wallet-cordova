@@ -1,54 +1,75 @@
 #!/bin/bash
 
-# F-Droid build script for Conceal Mobile Wallet
-# This script prepares the project for F-Droid builds
 
-set -e
+# Build script for Conceal Wallet with custom version naming
+# and F-droid tweaks
 
-echo "Building Conceal Mobile Wallet for F-Droid..."
+# Get version from config.xml
+VERSION=$(grep -o 'version="[^"]*"' config.xml | cut -d'"' -f2)
 
-# Check if we're in the right directory
-if [ ! -f "config.xml" ]; then
-    echo "Error: config.xml not found. Please run this script from the project root."
-    exit 1
-fi
-
-# Install dependencies if needed
-if [ ! -d "node_modules" ]; then
-    echo "Installing npm dependencies..."
-    npm install
-fi
-
-# Add Android platform if not present
-if [ ! -d "platforms/android" ]; then
-    echo "Adding Android platform..."
-    npx cordova platform add android
-fi
-
-# Add plugins if not present
-echo "Adding required plugins..."
-npx cordova plugin add cordova-plugin-android-permissions
-npx cordova plugin add cordova-plugin-camera
-npx cordova plugin add cordova-plugin-insomnia
-npx cordova plugin add cordova-plugin-app-version
-npx cordova plugin add cordova-plugin-network-information
-
-# Build for Android
-echo "Building Android APK..."
-npx cordova build android --release
-
-# Copy the APK to the expected location for F-Droid
-APK_PATH="platforms/android/app/build/outputs/apk/release/app-release.apk"
-TARGET_PATH="conceal-mobile-5.0.0.apk"
-
-if [ -f "$APK_PATH" ]; then
-    echo "Copying APK to $TARGET_PATH..."
-    cp "$APK_PATH" "$TARGET_PATH"
-    echo "Build completed successfully!"
-    echo "APK location: $TARGET_PATH"
+# Check if JAVA_HOME is set (from switch.sh)
+if [ -n "$JAVA_HOME" ]; then
+    export PATH=$JAVA_HOME/bin:$PATH
+    echo "Using JAVA_HOME: $JAVA_HOME"
 else
-    echo "Error: APK not found at $APK_PATH"
-    echo "Available APK files:"
-    ls -la platforms/android/app/build/outputs/apk/release/ || echo "No APK files found"
+    echo "⚠️  JAVA_HOME not set, using system Java"
+fi
+
+JAVA_VERSION=$(java -version 2>&1 | head -n 1 | cut -d'"' -f2 | cut -d'.' -f1)
+echo "Detected Java version: $JAVA_VERSION"
+
+echo "🚀 Building Conceal Wallet APK"
+echo "=============================="
+echo "Version: $VERSION"
+echo "Java Version: $JAVA_VERSION"
+echo ""
+
+# Tweak for f-droid
+# Ensure the hook is in config.xml for dependenciesInfo injection
+echo "🔧 Checking config.xml for required hook..."
+if ! grep -q '<hook src="hooks/before_build.js" type="before_build" />' config.xml; then
+    echo "⚠️  Hook not found in config.xml"
+else
+    echo "✅ Hook present in config.xml"
+fi
+
+# The dependenciesInfo block is now automatically injected via Cordova hooks
+# See hooks/before_build.js and build-extras.gradle
+
+# Build the APK
+echo "📱 Building Android APK..."
+cordova build android --release -- --packageType=apk
+
+# Check if build was successful
+if [ $? -eq 0 ]; then
+    echo "✅ Build successful!"
+    
+    # Define output directory
+    OUTPUT_DIR="builds"
+    mkdir -p $OUTPUT_DIR
+    
+    # Define custom filename
+    CUSTOM_FILENAME="Conceal_Mobile-v${VERSION}-java${JAVA_VERSION}.apk"
+    
+    # Copy and rename the APK
+    SOURCE_APK="platforms/android/app/build/outputs/apk/release/app-release.apk"
+    
+    if [ -f "$SOURCE_APK" ]; then
+        cp "$SOURCE_APK" "$OUTPUT_DIR/$CUSTOM_FILENAME"
+        echo "📦 APK saved as: $OUTPUT_DIR/$CUSTOM_FILENAME"
+        echo "📏 File size: $(du -h "$OUTPUT_DIR/$CUSTOM_FILENAME" | cut -f1)"
+        echo "🔐 SHA256: $(sha256sum "$OUTPUT_DIR/$CUSTOM_FILENAME" | cut -d' ' -f1)"
+        echo "$(sha256sum "$OUTPUT_DIR/$CUSTOM_FILENAME" | cut -d' ' -f1)" > "$OUTPUT_DIR/$CUSTOM_FILENAME.sha256"
+        
+    else
+        echo "❌ APK file not found at expected location: $SOURCE_APK"
+        echo "🔍 Looking for APK files..."
+        find platforms/android/app/build/outputs/apk/release/ -name "*.apk" -type f
+    fi
+else
+    echo "❌ Build failed!"
     exit 1
-fi 
+fi
+
+echo ""
+echo "🎉 Build for F-Droid completed successfully!" 

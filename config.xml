@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="48" id="com.concealnetwork.concealmobile" version="5.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <hook src="hooks/before_build.js" type="before_build" />
     <name>Conceal Mobile</name>
     <description>
 		THE SIMPLEST WAY TO USE CONCEAL, ANYWHERE AND ANY TIME

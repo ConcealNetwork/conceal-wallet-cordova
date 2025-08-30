@@ -1,20 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="48" id="com.concealnetwork.concealmobile" version="5.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="Permissions">
-        <param name="android-package" value="com.android.plugins.Permissions" />
-    </feature>
-    <feature name="Camera">
-        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
-    </feature>
-    <feature name="Insomnia">
-        <param name="android-package" value="nl.xservices.plugins.Insomnia" />
-    </feature>
-    <feature name="AppVersion">
-        <param name="android-package" value="uk.co.whiteoctober.cordova.AppVersion" />
-    </feature>
-    <feature name="NetworkStatus">
-        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
-    </feature>
+    <hook src="hooks/before_build.js" type="before_build" />
     <name>Conceal Mobile</name>
     <description>
 		THE SIMPLEST WAY TO USE CONCEAL, ANYWHERE AND ANY TIME

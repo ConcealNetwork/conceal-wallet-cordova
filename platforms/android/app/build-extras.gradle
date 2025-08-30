@@ -1,0 +1,12 @@
+// build-extras.gradle
+// This file is automatically included in the app's build.gradle by Cordova
+// It allows us to add custom configurations that survive platform recreation
+
+android {
+    dependenciesInfo {
+        // Disables dependency metadata when building APKs.
+        includeInApk = false
+        // Disables dependency metadata when building Android App Bundles.
+        includeInBundle = false
+    }
+}

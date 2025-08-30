@@ -1,51 +1,76 @@
 @echo off
-REM F-Droid build script for Conceal Mobile Wallet (Windows)
-REM This script prepares the project for F-Droid builds
+setlocal enabledelayedexpansion
 
-echo Building Conceal Mobile Wallet for F-Droid...
+REM Build script for Conceal Wallet with custom version naming and F-Droid tweaks
 
-REM Check if we're in the right directory
-if not exist "config.xml" (
-    echo Error: config.xml not found. Please run this script from the project root.
-    exit /b 1
-)
+REM Get version from config.xml
+for /f "tokens=2 delims=<>" %%a in ('findstr "version=" config.xml') do set VERSION=%%a
 
-REM Install dependencies if needed
-if not exist "node_modules" (
-    echo Installing npm dependencies...
-    npm install
-)
-
-REM Add Android platform if not present
-if not exist "platforms\android" (
-    echo Adding Android platform...
-    npx cordova platform add android
-)
-
-REM Add plugins if not present
-echo Adding required plugins...
-npx cordova plugin add cordova-plugin-android-permissions
-npx cordova plugin add cordova-plugin-camera
-npx cordova plugin add cordova-plugin-insomnia
-npx cordova plugin add cordova-plugin-app-version
-npx cordova plugin add cordova-plugin-network-information
-
-REM Build for Android
-echo Building Android APK...
-npx cordova build android --release
-
-REM Copy the APK to the expected location for F-Droid
-set APK_PATH=platforms\android\app\build\outputs\apk\release\app-release.apk
-set TARGET_PATH=conceal-mobile-5.0.0.apk
-
-if exist "%APK_PATH%" (
-    echo Copying APK to %TARGET_PATH%...
-    copy "%APK_PATH%" "%TARGET_PATH%"
-    echo Build completed successfully!
-    echo APK location: %TARGET_PATH%
+REM Check if JAVA_HOME is set (from switch.bat)
+if defined JAVA_HOME (
+    set PATH=%JAVA_HOME%\bin;%PATH%
+    echo Using JAVA_HOME: %JAVA_HOME%
 ) else (
-    echo Error: APK not found at %APK_PATH%
-    echo Available APK files:
-    dir platforms\android\app\build\outputs\apk\release\ 2>nul || echo No APK files found
+    echo ⚠️  JAVA_HOME not set, using system Java
+)
+
+REM Get Java version
+for /f "tokens=3" %%i in ('java -version 2^>^&1 ^| findstr "version"') do set JAVA_VERSION=%%i
+set JAVA_VERSION=!JAVA_VERSION:"=!
+
+echo 🚀 Building Conceal Wallet APK
+echo ==============================
+echo Version: %VERSION%
+echo Java Version: %JAVA_VERSION%
+echo.
+
+REM Tweak for f-droid
+REM The dependenciesInfo block is now automatically injected via Cordova hooks
+REM See hooks/before_build.js and build-extras.gradle
+
+REM Build the APK
+echo 📱 Building Android APK...
+npx cordova build android --release -- --packageType=apk
+
+REM Check if build was successful
+if %ERRORLEVEL% EQU 0 (
+    echo ✅ Build successful!
+    
+    REM Define output directory
+    set OUTPUT_DIR=builds
+    if not exist "%OUTPUT_DIR%" mkdir "%OUTPUT_DIR%"
+    
+    REM Define custom filename
+    set CUSTOM_FILENAME=Conceal_Mobile-v%VERSION%-java%JAVA_VERSION%.apk
+    
+    REM Copy and rename the APK
+    set SOURCE_APK=platforms\android\app\build\outputs\apk\release\app-release.apk
+    
+    if exist "%SOURCE_APK%" (
+        copy "%SOURCE_APK%" "%OUTPUT_DIR%\%CUSTOM_FILENAME%"
+        echo 📦 APK saved as: %OUTPUT_DIR%\%CUSTOM_FILENAME%
+        
+        REM Get file size
+        for %%A in ("%OUTPUT_DIR%\%CUSTOM_FILENAME%") do echo 📏 File size: %%~zA bytes
+        
+        REM Generate SHA256
+        echo 🔐 SHA256: 
+        powershell -Command "Get-FileHash -Algorithm SHA256 '%OUTPUT_DIR%\%CUSTOM_FILENAME%' | Select-Object -ExpandProperty Hash"
+        
+        REM Save SHA256 to file
+        powershell -Command "Get-FileHash -Algorithm SHA256 '%OUTPUT_DIR%\%CUSTOM_FILENAME%' | Select-Object -ExpandProperty Hash" > "%OUTPUT_DIR%\%CUSTOM_FILENAME%.sha256"
+        echo ✅ SHA256 saved to: %OUTPUT_DIR%\%CUSTOM_FILENAME%.sha256
+        
+    ) else (
+        echo ❌ APK file not found at expected location: %SOURCE_APK%
+        echo 🔍 Looking for APK files...
+        dir /s /b platforms\android\app\build\outputs\apk\release\*.apk 2>nul || echo No APK files found
+    )
+) else (
+    echo ❌ Build failed!
     exit /b 1
-) 
+)
+
+echo.
+echo 🎉 Build for F-Droid completed successfully!
+pause 
