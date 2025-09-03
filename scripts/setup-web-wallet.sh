@@ -35,9 +35,9 @@ git subtree add --prefix=www https://github.com/ConcealNetwork/conceal-web-walle
 echo "   ✓ Repository added as subtree successfully"
 
 # 3. Change to www directory and checkout testing branch (if needed)
-echo "3. Switching to testing branch..."
+echo "3. Switching to masterbranch..."
 cd www
-git checkout testing 2>/dev/null || echo "   ✓ Already on testing branch"
+git checkout master 2>/dev/null || echo "   ✓ Already on testing branch"
 echo "   ✓ Switched to testing branch"
 
 # 4. Install npm dependencies

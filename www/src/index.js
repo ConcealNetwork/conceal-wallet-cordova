@@ -16,7 +16,7 @@
  */
 
 ﻿// App configuration
-var APP_VERSION = "5.0.0";
+var APP_VERSION = "5.0.3";
 var APP_COPYRIGHT_YEAR = new Date().getFullYear();
 
 // Function to show version info for 3 seconds then hide it
@@ -210,9 +210,15 @@ function onDeviceReady() {
                 // Retry once after 3 seconds if first attempt failed
                 if (!isRetry) {
                     setTimeout(function() {
-                        console.log('🌐 Retrying network connectivity test...');
                         testNetworkConnectivity(true);
-                    }, 3000);
+                    }, 20000);
+                } else {
+                    // If retry also failed, hide the status after 5 seconds
+                    setTimeout(function() {
+                        if (networkStatus) {
+                            networkStatus.style.display = 'none';
+                        }
+                    }, 5000);
                 }
             }
         }
@@ -223,6 +229,21 @@ function onDeviceReady() {
         if (window.config && window.config.nodeList) {
             var reachableNodes = 0;
             var totalNodes = window.config.nodeList.length;
+            var completedTests = 0;
+
+            // If no nodes to test, show error immediately
+            if (totalNodes === 0) {
+                updateNetworkStatus(0, 0, isRetry);
+                return;
+            }
+
+            // Add a global timeout to ensure we don't wait forever
+            var globalTimeout = setTimeout(function() {
+                if (completedTests < totalNodes) {
+                    completedTests = totalNodes;
+                    updateNetworkStatus(reachableNodes, totalNodes, isRetry);
+                }
+            }, 15000); // 15 second global timeout
             
             window.config.nodeList.forEach(function(nodeUrl, index) {
                 fetch(nodeUrl + 'getinfo', { 
@@ -231,12 +252,22 @@ function onDeviceReady() {
                     body: JSON.stringify({ jsonrpc: '2.0', id: 'test', method: 'getinfo', params: {} }),
                     timeout: 10000 // Increased timeout
                 }).then(function(response) {
-                    console.log('🌐 Node ' + (index + 1) + ' (' + nodeUrl + ') is reachable');
                     reachableNodes++;
-                    updateNetworkStatus(reachableNodes, totalNodes, isRetry);
+                    completedTests++;
+
+                    // Only update status when all tests are complete
+                    if (completedTests === totalNodes) {
+                        clearTimeout(globalTimeout);
+                        updateNetworkStatus(reachableNodes, totalNodes, isRetry);
+                    }
                 }).catch(function(error) {
-                    console.log('🌐 Node ' + (index + 1) + ' (' + nodeUrl + ') is not reachable:', error.message);
-                    updateNetworkStatus(reachableNodes, totalNodes, isRetry);
+                    completedTests++;
+
+                    // Only update status when all tests are complete
+                    if (completedTests === totalNodes) {
+                        clearTimeout(globalTimeout);
+                        updateNetworkStatus(reachableNodes, totalNodes, isRetry);
+                    }
                 });
             });
         }
