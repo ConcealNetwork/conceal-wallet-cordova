@@ -16,7 +16,7 @@
  */
 
 ﻿// App configuration
-var APP_VERSION = "5.0.0";
+var APP_VERSION = "5.0.3";
 var APP_COPYRIGHT_YEAR = new Date().getFullYear();
 
 // Function to show version info for 3 seconds then hide it
