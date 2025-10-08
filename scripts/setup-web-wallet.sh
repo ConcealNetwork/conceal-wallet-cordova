@@ -2,7 +2,7 @@
 
 # Conceal Web Wallet Setup Script
 # This script sets up the web wallet locally for Cordova integration using Git subtree
-
+# run from root ./srcipts/setup-web-wallet.sh
 set -e  # Exit on any error
 
 echo "Starting Conceal Web Wallet setup with Git subtree..."
@@ -31,14 +31,14 @@ fi
 
 # 2. Add the external repository as a subtree
 echo "2. Adding Conceal Web Wallet as Git subtree..."
-git subtree add --prefix=www https://github.com/ConcealNetwork/conceal-web-wallet.git testing --squash
+git subtree add --prefix=www https://github.com/ConcealNetwork/conceal-web-wallet.git master --squash
 echo "   ✓ Repository added as subtree successfully"
 
-# 3. Change to www directory and checkout testing branch (if needed)
-echo "3. Switching to masterbranch..."
+# 3. Change to www directory and checkout master branch (if needed)
+echo "3. Switching to master branch..."
 cd www
-git checkout master 2>/dev/null || echo "   ✓ Already on testing branch"
-echo "   ✓ Switched to testing branch"
+git checkout master 2>/dev/null || echo "   ✓ Already on master branch"
+echo "   ✓ Switched to master branch"
 
 # 4. Install npm dependencies
 echo "4. Installing npm dependencies..."
@@ -154,7 +154,7 @@ echo "   ✓ Backup files cleaned up"
 # 15. Commit the subtree changes to the parent repository
 echo "15. Committing subtree changes to parent repository..."
 git add www/
-git commit -m "Add Conceal Web Wallet as subtree from testing branch
+git commit -m "Add Conceal Web Wallet as subtree from master branch
 
 - Integrated conceal-web-wallet repository as Git subtree
 - Applied Cordova-specific modifications
@@ -172,4 +172,4 @@ echo "2. Test the integration"
 echo "3. Build your Cordova app"
 echo ""
 echo "To update the subtree in the future, use:"
-echo "  git subtree pull --prefix=www https://github.com/ConcealNetwork/conceal-web-wallet.git testing --squash" 
+echo "  git subtree pull --prefix=www https://github.com/ConcealNetwork/conceal-web-wallet.git master --squash" 
