@@ -38,9 +38,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 define(["require", "exports", "../model/WalletRepository", "../providers/BlockchainExplorerProvider", "../lib/numbersLab/DependencyInjector", "../lib/numbersLab/VueAnnotate", "../lib/numbersLab/DestructableView", "../model/Wallet", "../model/AppState"], function (require, exports, WalletRepository_1, BlockchainExplorerProvider_1, DependencyInjector_1, VueAnnotate_1, DestructableView_1, Wallet_1, AppState_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    // Show loading screen when index page starts loading
-    $('#pageLoading').show();
-    
     var wallet = (0, DependencyInjector_1.DependencyInjectorInstance)().getInstance(Wallet_1.Wallet.name, 'default', false);
     var blockchainExplorer = BlockchainExplorerProvider_1.BlockchainExplorerProvider.getInstance();
     if (wallet !== null) {
@@ -53,10 +50,6 @@ define(["require", "exports", "../model/WalletRepository", "../providers/Blockch
             _this.isWalletLoaded = (0, DependencyInjector_1.DependencyInjectorInstance)().getInstance(Wallet_1.Wallet.name, 'default', false) !== null;
             WalletRepository_1.WalletRepository.hasOneStored().then(function (status) {
                 _this.hasLocalWallet = status;
-                // Hide loading screen after wallet status is checked
-                setTimeout(function() {
-                    $('#pageLoading').hide();
-                }, 300);
             });
             AppState_1.AppState.disableLeftMenu();
             return _this;

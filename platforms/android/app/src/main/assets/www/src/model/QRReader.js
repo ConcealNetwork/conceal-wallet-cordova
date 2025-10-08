@@ -40,7 +40,7 @@ define(["require", "exports"], function (require, exports) {
         }
         QRReader.prototype.setCanvas = function () {
             this.canvas = document.createElement("canvas");
-            this.ctx = this.canvas.getContext("2d", { willReadFrequently: true });
+            this.ctx = this.canvas.getContext("2d");
         };
         QRReader.prototype.support = function () {
             return typeof navigator !== 'undefined' && typeof navigator.mediaDevices !== 'undefined';
