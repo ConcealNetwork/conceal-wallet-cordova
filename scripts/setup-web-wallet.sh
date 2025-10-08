@@ -54,6 +54,8 @@ echo "   ✓ Build completed successfully"
 echo "6. Removing TypeScript and markdown files..."
 find . -name "*.ts" -type f -delete
 find . -name "*.md" -type f -delete
+rm -rf CNAME
+rm -rf node_modules
 echo "   ✓ TypeScript and markdown files removed"
 
 # 7. Add cordova.js script to index.html
