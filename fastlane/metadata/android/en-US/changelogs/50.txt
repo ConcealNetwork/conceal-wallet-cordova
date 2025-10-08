@@ -1,0 +1,3 @@
+- Fix transaction sent without message
+- rephrase Import page
+- Improve initialization sequence when generating wallet
