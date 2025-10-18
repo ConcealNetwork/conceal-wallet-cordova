@@ -2,6 +2,12 @@
 
 THE SIMPLEST WAY TO USE CONCEAL – ANYWHERE AND ANY TIME
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/com.concealnetwork.concealmobile/)
+
+Or download the latest APK from the [Releases Section](https://github.com/ConcealNetwork/conceal-wallet-cordova/releases/latest).
+
 ## Install
 
 Install Cordova `npm install -g cordova`
