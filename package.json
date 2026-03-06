@@ -25,7 +25,7 @@
     ]
   },
   "devDependencies": {
-    "cordova-android": "^14.0.1",
+    "cordova-android": "^15.0.0",
     "cordova-plugin-android-permissions": "^1.1.4"
   }
 }
