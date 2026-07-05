@@ -8,7 +8,9 @@ node_modules/
 /build.json
 /keys/upload-keystore.jks
 /keys/release-keystore.jks
+/keys/*
 /builds/
+/build
 
 # F-Droid build artifacts
 conceal-mobile-*.apk

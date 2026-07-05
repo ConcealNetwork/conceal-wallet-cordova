@@ -3,6 +3,13 @@
 // It allows us to add custom configurations that survive platform recreation
 
 android {
+    // Next.js static export uses `_next/` (and `_not-found/`). Android's default
+    // ignoreAssetsPattern includes "_*" and strips those folders from the APK,
+    // leaving the app stuck on the SSR "Loading..." shell with no JS bundles.
+    androidResources {
+        ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+    }
+
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
         includeInApk = false

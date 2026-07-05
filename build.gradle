@@ -26,7 +26,7 @@ task buildFdroid {
     doLast {
         // Copy the built APK to the expected location
         def apkFile = file('platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk')
-        def targetFile = file('conceal-mobile-5.0.0.apk')
+        def targetFile = file('conceal-mobile-6.0.0.apk')
         
         if (apkFile.exists()) {
             targetFile.parentFile.mkdirs()

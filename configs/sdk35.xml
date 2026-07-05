@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="50" id="com.concealnetwork.concealmobile" version="5.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="51" id="com.concealnetwork.concealmobile" version="6.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <hook src="hooks/before_build.js" type="before_build" />
     <name>Conceal Mobile</name>
     <description>
 		THE SIMPLEST WAY TO USE CONCEAL, ANYWHERE AND ANY TIME
@@ -7,7 +8,7 @@
     <author email="ccx@conceal.network" href="https://conceal.network">
 		Conceal Network
 	</author>
-    <content src="src/index.html" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -28,10 +29,10 @@
             <uses-feature android:name="android.hardware.camera2.autofocus" android:required="false" />
         </config-file>
         <preference name="android-targetSdkVersion" value="35" />
-        <preference name="android-compileSdkVersion" value="35" />
-        <preference name="android-buildToolsVersion" value="35.0.0" />
+        <preference name="android-compileSdkVersion" value="36" />
+        <preference name="android-buildToolsVersion" value="36.0.0" />
         <preference name="AndroidXEnabled" value="true" />
-        <preference name="android-suppressUnsupportedCompileSdk" value="35" />
+        <preference name="android-suppressUnsupportedCompileSdk" value="36" />
         <preference name="KeepRunning" value="true" />
         <preference name="DisallowOverscroll" value="true" />
         <preference name="android-minSdkVersion" value="22" />
@@ -44,7 +45,7 @@
         <preference name="StatusBarStyle" value="lightcontent" />
         <preference name="NavigationBarBackgroundColor" value="#111111" />
         <preference name="NavigationBarLight" value="false" />
-        <resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml" />
+        <resource-file src="res/values/app_colors.xml" target="/app/src/main/res/values/app_colors.xml" />
         <icon background="@color/background" density="ldpi" foreground="res/icon/android/ldpi-foreground.png" />
         <icon background="@color/background" density="mdpi" foreground="res/icon/android/mdpi-foreground.png" />
         <icon background="@color/background" density="hdpi" foreground="res/icon/android/hdpi-foreground.png" />

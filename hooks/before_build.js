@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = function(context) {
-    console.log('🔧 Before Build Hook: Injecting dependenciesInfo for F-Droid...');
+    console.log('🔧 Before Build Hook: Applying build-extras.gradle...');
+
     
     // Get the platform directory
     const platformRoot = path.join(context.opts.projectRoot, 'platforms', 'android', 'app');
@@ -29,7 +30,7 @@ module.exports = function(context) {
         // Copy build-extras.gradle to the Android app directory
         fs.copyFileSync(sourceFile, targetFile);
         console.log('✅ build-extras.gradle copied to Android platform successfully');
-        console.log('✅ dependenciesInfo block will be included in the build');
+        console.log('✅ Includes _next asset packaging fix and F-Droid dependenciesInfo');
     } catch (error) {
         console.log('❌ Failed to copy build-extras.gradle:', error.message);
     }

@@ -22,6 +22,14 @@ echo "Version: $VERSION"
 echo "Java Version: $JAVA_VERSION"
 echo ""
 
+echo ""
+
+# Ensure build-extras.gradle is on the Android platform (includes _next asset fix)
+if [ -f build-extras.gradle ] && [ -d platforms/android/app ]; then
+    cp build-extras.gradle platforms/android/app/build-extras.gradle
+    echo "✅ build-extras.gradle applied (Next.js _next assets + F-Droid tweaks)"
+fi
+
 # Build the APK
 echo "📱 Building Android APK..."
 cordova build android --release -- --packageType=apk
