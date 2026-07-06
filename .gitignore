@@ -12,6 +12,7 @@ node_modules/
 /builds/
 /build
 /.gradle/
+/platforms
 
 # F-Droid build artifacts
 conceal-mobile-*.apk
