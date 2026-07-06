@@ -1,0 +1,3 @@
+rootProject.name = 'conceal-wallet-cordova'
+include ':platforms:android'
+project(':platforms:android').projectDir = new File('platforms/android') 

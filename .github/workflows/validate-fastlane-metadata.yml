@@ -2,7 +2,7 @@ name: Fastlane Check
 
 on:
   pull_request:
-    branches: [f-droid]
+    branches: [f-droid, main]
   workflow_dispatch:
 
 jobs:

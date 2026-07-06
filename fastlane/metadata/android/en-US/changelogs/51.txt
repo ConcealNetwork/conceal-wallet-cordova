@@ -1,0 +1,2 @@
+- New Frontend Next.js
+- New functionalities : Conversation, Pulse

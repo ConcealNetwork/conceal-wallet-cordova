@@ -9,12 +9,12 @@
 			"packageType": "apk"
 		},
 		"release": {
-			"keystore": "<keystore.jks>",
+			"keystore": "keys/release-keystore.jks",
 			"storePassword": "<storePassword>",
-			"alias": "<alias>",
-			"password" : "<password>",
+			"alias": "conceal-mobile",
+			"password": "<password>",
 			"keystoreType": "PKCS12",
-			"packageType": "bundle"
+			"packageType": "apk"
 		}
 	}
 }
