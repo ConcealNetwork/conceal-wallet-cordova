@@ -33,8 +33,9 @@ echo "Sync www/ into Cordova assets (F-Droid prebuild)..."
 rm -rf "$APP_DIR/src/main/assets/www"
 cp -a "$ROOT/www" "$APP_DIR/src/main/assets/"
 
-echo "Apply F-Droid Gradle tweaks..."
-sed -i -e '/addSigningProps(cdv/d' "$APP_DIR/build.gradle"
+echo "Apply F-Droid Gradle tweaks (match fdroiddata prebuild)..."
+sed -i -e '/addSigningProps(cdv/d' -e '/signingConfig signingConfigs\.release/d' "$APP_DIR/build.gradle"
+rm -f "$ROOT/platforms/android/release-signing.properties" "$ROOT/platforms/android/debug-signing.properties"
 cp "$ROOT/build-extras.gradle" "$APP_DIR/build-extras.gradle"
 
 echo "Gradle assembleRelease (unsigned)..."
