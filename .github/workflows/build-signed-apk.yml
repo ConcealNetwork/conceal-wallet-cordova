@@ -31,8 +31,12 @@ jobs:
           sdkmanager --install \
             "platforms;android-36" \
             "platforms;android-35" \
+            "build-tools;34.0.0" \
             "build-tools;36.0.0"
           yes | sdkmanager --licenses
+          # Gradle may use newer build-tools; apksigner MUST be 34 for F-Droid sig copy.
+          # https://f-droid.org/docs/Reproducible_Builds/#apksigner-from-build-tools-3500-rc1-outputs-unverifiable-apks
+          echo "APKSIGNER=$ANDROID_HOME/build-tools/34.0.0/apksigner" >> "$GITHUB_ENV"
           echo "$ANDROID_HOME/build-tools/36.0.0" >> "$GITHUB_PATH"
 
       - name: Set up Node.js 24
@@ -122,7 +126,7 @@ jobs:
           VERSION=$(grep -o 'version="[^"]*"' config.xml | head -1 | cut -d'"' -f2)
           APK="builds/Conceal_Mobile-v${VERSION}-java21.apk"
 
-          apksigner sign \
+          "$APKSIGNER" sign \
             --ks keys/release-keystore.jks \
             --ks-key-alias "$ANDROID_KEY_ALIAS" \
             --ks-pass "pass:$ANDROID_KEYSTORE_PASSWORD" \
@@ -132,7 +136,7 @@ jobs:
 
           mv "${APK}.signed" "$APK"
           sha256sum "$APK" | cut -d' ' -f1 > "$APK.sha256"
-          apksigner verify --verbose "$APK"
+          "$APKSIGNER" verify --verbose "$APK"
 
       - name: Build signed APK (regular Cordova)
         if: github.ref_type != 'tag' || !endsWith(github.ref_name, '-f-droid')
