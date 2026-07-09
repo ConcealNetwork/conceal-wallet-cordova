@@ -1,6 +1,9 @@
 name: Build signed APK
 
 on:
+  push:
+    tags:
+      - "*-f-droid"
   workflow_dispatch:
 
 jobs:
@@ -79,14 +82,42 @@ jobs:
               }
             }' > build.json
 
-      - name: Build signed APK (sdk35, regular)
-        run: printf '1\nr\n' | ./switch.sh
+      - name: Build signed APK
+        run: |
+          if [[ "${{ github.ref_type }}" == "tag" && "${{ github.ref_name }}" == *-f-droid ]]; then
+            echo "F-Droid reference build for tag ${{ github.ref_name }}"
+            printf '1\nf\n' | ./switch.sh
+          else
+            echo "Regular signed build (workflow_dispatch)"
+            printf '1\nr\n' | ./switch.sh
+          fi
+
+      - name: Verify F-Droid release artifact
+        if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
+        run: |
+          VERSION=$(grep -o 'version="[^"]*"' config.xml | head -1 | cut -d'"' -f2)
+          APK="builds/Conceal_Mobile-v${VERSION}-java21.apk"
+          if [ ! -f "$APK" ]; then
+            echo "Expected F-Droid reference APK not found: $APK"
+            ls -la builds/ || true
+            exit 1
+          fi
+          echo "Found reference APK: $APK"
 
       - name: Remove signing files
         if: always()
         run: |
           rm -f build.json
           rm -f keys/release-keystore.jks
+
+      - name: Create GitHub release
+        if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            builds/*.apk
+            builds/*.sha256
+          generate_release_notes: true
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v6
