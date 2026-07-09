@@ -17,6 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
       - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
@@ -34,18 +39,11 @@ jobs:
             "build-tools;36.0.0"
           yes | sdkmanager --licenses
 
-      - name: Set up Node.js 24
-        if: github.ref_type != 'tag' || !endsWith(github.ref_name, '-f-droid')
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-
       - name: Install Cordova CLI
-        if: github.ref_type != 'tag' || !endsWith(github.ref_name, '-f-droid')
         run: npm install -g cordova@latest
 
       - name: Make build scripts executable
-        run: chmod +x switch.sh build-with-version.sh build-fdroid.sh build-fdroid-reference.sh
+        run: chmod +x switch.sh build-with-version.sh build-fdroid.sh
 
       - name: Prepare signing config
         env:
@@ -67,8 +65,6 @@ jobs:
             exit 1
           fi
 
-          echo "ANDROID_KEY_ALIAS=${ANDROID_KEY_ALIAS:-conceal-mobile}" >> "$GITHUB_ENV"
-
           jq -n \
             --arg alias "${ANDROID_KEY_ALIAS:-conceal-mobile}" \
             --arg storePass "$ANDROID_KEYSTORE_PASSWORD" \
@@ -86,43 +82,27 @@ jobs:
               }
             }' > build.json
 
-      - name: Build F-Droid reference APK (unsigned + postbuild)
-        if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
-        run: ./build-fdroid-reference.sh
-
-      - name: Sign F-Droid reference APK
-        if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
-        env:
-          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Build signed APK
         run: |
-          VERSION=$(grep -o 'version="[^"]*"' config.xml | head -1 | cut -d'"' -f2)
-          UNSIGNED="builds/Conceal_Mobile-v${VERSION}-java21.apk"
-          SIGNED="builds/Conceal_Mobile-v${VERSION}-java21-signed.apk"
-
-          apksigner sign \
-            --ks keys/release-keystore.jks \
-            --ks-key-alias "$ANDROID_KEY_ALIAS" \
-            --ks-pass "pass:$ANDROID_KEYSTORE_PASSWORD" \
-            --key-pass "pass:$ANDROID_KEY_PASSWORD" \
-            --out "$SIGNED" \
-            "$UNSIGNED"
-
-          mv "$SIGNED" "$UNSIGNED"
-          sha256sum "$UNSIGNED" | cut -d' ' -f1 > "$UNSIGNED.sha256"
-          apksigner verify --verbose "$UNSIGNED"
-
-      - name: Build signed APK (regular)
-        if: github.ref_type != 'tag' || !endsWith(github.ref_name, '-f-droid')
-        run: printf '1\nr\n' | ./switch.sh
+          if [[ "${{ github.ref_type }}" == "tag" && "${{ github.ref_name }}" == *-f-droid ]]; then
+            echo "F-Droid reference build for tag ${{ github.ref_name }}"
+            printf '1\nf\n' | ./switch.sh
+          else
+            echo "Regular signed build (workflow_dispatch)"
+            printf '1\nr\n' | ./switch.sh
+          fi
 
       - name: Verify F-Droid release artifact
         if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
         run: |
           VERSION=$(grep -o 'version="[^"]*"' config.xml | head -1 | cut -d'"' -f2)
           APK="builds/Conceal_Mobile-v${VERSION}-java21.apk"
-          test -f "$APK"
-          echo "Found reference APK: $APK ($(wc -c < "$APK") bytes)"
+          if [ ! -f "$APK" ]; then
+            echo "Expected F-Droid reference APK not found: $APK"
+            ls -la builds/ || true
+            exit 1
+          fi
+          echo "Found reference APK: $APK"
 
       - name: Remove signing files
         if: always()
