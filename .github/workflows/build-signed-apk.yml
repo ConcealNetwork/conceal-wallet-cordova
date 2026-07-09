@@ -31,8 +31,11 @@ jobs:
           sdkmanager --install \
             "platforms;android-36" \
             "platforms;android-35" \
+            "build-tools;34.0.0" \
             "build-tools;36.0.0"
           yes | sdkmanager --licenses
+          echo "APKSIGNER=$ANDROID_HOME/build-tools/34.0.0/apksigner" >> "$GITHUB_ENV"
+          echo "$ANDROID_HOME/build-tools/36.0.0" >> "$GITHUB_PATH"
 
       - name: Set up Node.js 24
         if: github.ref_type != 'tag' || !endsWith(github.ref_name, '-f-droid')
@@ -47,7 +50,50 @@ jobs:
       - name: Make build scripts executable
         run: chmod +x switch.sh build-with-version.sh build-fdroid.sh build-fdroid-reference.sh
 
-      - name: Prepare signing config
+      - name: Prepare signing config (Cordova release build)
+        if: github.ref_type != 'tag' || !endsWith(github.ref_name, '-f-droid')
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD" ] || [ -z "$ANDROID_KEY_PASSWORD" ]; then
+            echo "Missing required secrets: ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_PASSWORD"
+            exit 1
+          fi
+
+          mkdir -p keys
+          echo "$ANDROID_KEYSTORE_BASE64" | tr -d '[:space:]' | base64 -d > keys/release-keystore.jks
+          decoded_size=$(wc -c < keys/release-keystore.jks)
+          if [ "$decoded_size" -lt 500 ]; then
+            echo "Decoded keystore is only ${decoded_size} bytes — ANDROID_KEYSTORE_BASE64 is truncated or invalid"
+            exit 1
+          fi
+
+          jq -n \
+            --arg alias "${ANDROID_KEY_ALIAS:-conceal-mobile}" \
+            --arg storePass "$ANDROID_KEYSTORE_PASSWORD" \
+            --arg keyPass "$ANDROID_KEY_PASSWORD" \
+            '{
+              android: {
+                release: {
+                  keystore: "keys/release-keystore.jks",
+                  storePassword: $storePass,
+                  alias: $alias,
+                  password: $keyPass,
+                  keystoreType: "PKCS12",
+                  packageType: "apk"
+                }
+              }
+            }' > build.json
+
+      - name: Build F-Droid reference APK (unsigned + inplace-fix.py)
+        if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
+        run: ./build-fdroid-reference.sh
+
+      - name: Decode release keystore (F-Droid signing)
+        if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -69,27 +115,6 @@ jobs:
 
           echo "ANDROID_KEY_ALIAS=${ANDROID_KEY_ALIAS:-conceal-mobile}" >> "$GITHUB_ENV"
 
-          jq -n \
-            --arg alias "${ANDROID_KEY_ALIAS:-conceal-mobile}" \
-            --arg storePass "$ANDROID_KEYSTORE_PASSWORD" \
-            --arg keyPass "$ANDROID_KEY_PASSWORD" \
-            '{
-              android: {
-                release: {
-                  keystore: "keys/release-keystore.jks",
-                  storePassword: $storePass,
-                  alias: $alias,
-                  password: $keyPass,
-                  keystoreType: "PKCS12",
-                  packageType: "apk"
-                }
-              }
-            }' > build.json
-
-      - name: Build F-Droid reference APK (unsigned + postbuild)
-        if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
-        run: ./build-fdroid-reference.sh
-
       - name: Sign F-Droid reference APK
         if: github.ref_type == 'tag' && endsWith(github.ref_name, '-f-droid')
         env:
@@ -97,22 +122,21 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           VERSION=$(grep -o 'version="[^"]*"' config.xml | head -1 | cut -d'"' -f2)
-          UNSIGNED="builds/Conceal_Mobile-v${VERSION}-java21.apk"
-          SIGNED="builds/Conceal_Mobile-v${VERSION}-java21-signed.apk"
+          APK="builds/Conceal_Mobile-v${VERSION}-java21.apk"
 
-          apksigner sign \
+          "$APKSIGNER" sign \
             --ks keys/release-keystore.jks \
             --ks-key-alias "$ANDROID_KEY_ALIAS" \
             --ks-pass "pass:$ANDROID_KEYSTORE_PASSWORD" \
             --key-pass "pass:$ANDROID_KEY_PASSWORD" \
-            --out "$SIGNED" \
-            "$UNSIGNED"
+            --out "${APK}.signed" \
+            "$APK"
 
-          mv "$SIGNED" "$UNSIGNED"
-          sha256sum "$UNSIGNED" | cut -d' ' -f1 > "$UNSIGNED.sha256"
-          apksigner verify --verbose "$UNSIGNED"
+          mv "${APK}.signed" "$APK"
+          sha256sum "$APK" | cut -d' ' -f1 > "$APK.sha256"
+          "$APKSIGNER" verify --verbose "$APK"
 
-      - name: Build signed APK (regular)
+      - name: Build signed APK (regular Cordova)
         if: github.ref_type != 'tag' || !endsWith(github.ref_name, '-f-droid')
         run: printf '1\nr\n' | ./switch.sh
 
