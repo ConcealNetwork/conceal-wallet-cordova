@@ -33,6 +33,7 @@ jobs:
             "platforms;android-35" \
             "build-tools;36.0.0"
           yes | sdkmanager --licenses
+          echo "$ANDROID_HOME/build-tools/36.0.0" >> "$GITHUB_PATH"
 
       - name: Set up Node.js 24
         if: github.ref_type != 'tag' || !endsWith(github.ref_name, '-f-droid')
