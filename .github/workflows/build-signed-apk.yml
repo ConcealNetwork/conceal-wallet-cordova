@@ -34,8 +34,6 @@ jobs:
             "build-tools;34.0.0" \
             "build-tools;36.0.0"
           yes | sdkmanager --licenses
-          # Gradle may use newer build-tools; apksigner MUST be 34 for F-Droid sig copy.
-          # https://f-droid.org/docs/Reproducible_Builds/#apksigner-from-build-tools-3500-rc1-outputs-unverifiable-apks
           echo "APKSIGNER=$ANDROID_HOME/build-tools/34.0.0/apksigner" >> "$GITHUB_ENV"
           echo "$ANDROID_HOME/build-tools/36.0.0" >> "$GITHUB_PATH"
 
