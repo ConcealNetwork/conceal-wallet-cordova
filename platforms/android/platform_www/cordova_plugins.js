@@ -71,6 +71,19 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "Connection"
       ]
+    },
+    {
+      "id": "cordova-plugin-save-dialog.SaveDialog",
+      "file": "plugins/cordova-plugin-save-dialog/www/android/SaveDialog.js",
+      "pluginId": "cordova-plugin-save-dialog",
+      "clobbers": [
+        "cordova.plugins.saveDialog"
+      ]
+    },
+    {
+      "id": "cordova-plugin-save-dialog.BlobKeeper",
+      "file": "plugins/cordova-plugin-save-dialog/www/android/BlobKeeper.js",
+      "pluginId": "cordova-plugin-save-dialog"
     }
   ];
   module.exports.metadata = {
@@ -78,6 +91,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-camera": "8.0.0",
     "cordova-plugin-insomnia": "4.3.0",
     "cordova-plugin-app-version": "0.1.14",
-    "cordova-plugin-network-information": "3.0.0"
+    "cordova-plugin-network-information": "3.0.0",
+    "cordova-plugin-save-dialog": "2.0.1"
   };
 });

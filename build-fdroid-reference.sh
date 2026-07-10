@@ -33,6 +33,15 @@ echo "Sync www/ into Cordova assets (F-Droid prebuild)..."
 rm -rf "$APP_DIR/src/main/assets/www"
 cp -a "$ROOT/www" "$APP_DIR/src/main/assets/"
 
+# Cordova bootstrap + plugin JS live under platform_www/, not repo www/
+PLATFORM_WWW="$ROOT/platforms/android/platform_www"
+if [ -f "$PLATFORM_WWW/cordova.js" ]; then
+  cp "$PLATFORM_WWW/cordova.js" "$APP_DIR/src/main/assets/www/"
+  cp "$PLATFORM_WWW/cordova_plugins.js" "$APP_DIR/src/main/assets/www/"
+  mkdir -p "$APP_DIR/src/main/assets/www/plugins"
+  cp -a "$PLATFORM_WWW/plugins/." "$APP_DIR/src/main/assets/www/plugins/"
+fi
+
 echo "Apply F-Droid Gradle tweaks (match fdroiddata prebuild)..."
 sed -i -e '/addSigningProps(cdv/d' -e '/signingConfig signingConfigs\.release/d' "$APP_DIR/build.gradle"
 rm -f "$ROOT/platforms/android/release-signing.properties" "$ROOT/platforms/android/debug-signing.properties"

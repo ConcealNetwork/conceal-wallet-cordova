@@ -15,6 +15,17 @@ platforms/android/debug-signing.properties
 /build
 /.gradle/
 
+# Cordova Android platform — cache & Gradle outputs (keep source tree)
+platforms/android/.gradle/
+platforms/android/tools/.gradle/
+platforms/android/**/build/
+platforms/android/build/
+platforms/android/local.properties
+platforms/android/.idea/
+
+# App web assets are synced from repo www/ at build time (see build-fdroid-reference.sh)
+platforms/android/app/src/main/assets/www/
+
 # F-Droid build artifacts
 conceal-mobile-*.apk
 

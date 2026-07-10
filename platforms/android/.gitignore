@@ -17,5 +17,11 @@ out
 /CordovaLib/build
 /app/build
 gradle-app.setting
+# Cordova tools Gradle cache
+/tools/.gradle/
+/tools/build/
+# Web assets copied from repo www/ at build time
+/app/src/main/assets/www/
 # Android Studio
 .idea
+local.properties

@@ -15,6 +15,9 @@
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
     </feature>
+    <feature name="SaveDialog">
+        <param name="android-package" value="io.github.amphiluke.SaveDialog" />
+    </feature>
     <hook src="hooks/before_build.js" type="before_build" />
     <name>Conceal Mobile</name>
     <description>
