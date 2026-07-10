@@ -15,6 +15,14 @@ platforms/android/debug-signing.properties
 /build
 /.gradle/
 
+# Cordova Android platform — Gradle cache & build outputs only
+platforms/android/.gradle/
+platforms/android/tools/.gradle/
+platforms/android/**/build/
+platforms/android/build/
+platforms/android/local.properties
+platforms/android/.idea/
+
 # F-Droid build artifacts
 conceal-mobile-*.apk
 

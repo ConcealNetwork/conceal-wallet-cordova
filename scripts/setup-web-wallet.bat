@@ -143,6 +143,7 @@ call cordova plugin add cordova-plugin-insomnia@~4.3.0
 call cordova plugin add cordova-plugin-app-version@~0.1.9
 call cordova plugin add cordova-plugin-android-permissions@~1.1.5
 call cordova plugin add cordova-plugin-network-information@~3.0.0
+call cordova plugin add cordova-plugin-save-dialog@^2.0.0
 echo    ✓ Cordova plugins installed
 
 REM 14. Clean up backup files
