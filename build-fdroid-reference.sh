@@ -30,8 +30,22 @@ if [ ! -d "$ROOT/www" ]; then
 fi
 
 echo "Sync www/ into Cordova assets (F-Droid prebuild)..."
-rm -rf "$APP_DIR/src/main/assets/www"
-cp -a "$ROOT/www" "$APP_DIR/src/main/assets/"
+ASSETS_WWW="$APP_DIR/src/main/assets/www"
+mkdir -p "$APP_DIR/src/main/assets"
+rm -rf "$ASSETS_WWW"
+cp -a "$ROOT/www/." "$ASSETS_WWW/"
+
+# Root www/ is the Next export only — Cordova bootstrap + plugins live in platform_www/.
+# Without this merge, camera permissions / save-dialog / etc. are missing from the APK.
+PLATFORM_WWW="$ROOT/platforms/android/platform_www"
+if [ ! -f "$PLATFORM_WWW/cordova.js" ]; then
+    echo "Missing $PLATFORM_WWW/cordova.js — run switch.sh / cordova prepare first"
+    exit 1
+fi
+cp "$PLATFORM_WWW/cordova.js" "$ASSETS_WWW/"
+cp "$PLATFORM_WWW/cordova_plugins.js" "$ASSETS_WWW/"
+mkdir -p "$ASSETS_WWW/plugins"
+cp -a "$PLATFORM_WWW/plugins/." "$ASSETS_WWW/plugins/"
 
 echo "Apply F-Droid Gradle tweaks (match fdroiddata prebuild)..."
 sed -i -e '/addSigningProps(cdv/d' -e '/signingConfig signingConfigs\.release/d' "$APP_DIR/build.gradle"
