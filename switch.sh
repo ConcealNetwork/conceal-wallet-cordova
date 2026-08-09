@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# Local tracked plugins (file:) — always refresh from cordova-plugins/ so native
+# source edits land in plugins/ and platforms/android (rm+add is not optional).
+ensure_local_cordova_plugins() {
+    local biometric_plugin="./cordova-plugins/cordova-plugin-biometric-unlock"
+    if [[ ! -d "$biometric_plugin" ]]; then
+        echo "Missing $biometric_plugin"
+        exit 1
+    fi
+    echo "Refreshing cordova-plugin-biometric-unlock from tracked source..."
+    cordova plugin rm cordova-plugin-biometric-unlock 2>/dev/null || true
+    cordova plugin add "$biometric_plugin"
+    if ! cordova plugin ls 2>/dev/null | grep -q '^cordova-plugin-biometric-unlock'; then
+        echo "cordova-plugin-biometric-unlock failed to install"
+        exit 1
+    fi
+    echo "cordova-plugin-biometric-unlock refreshed"
+}
+
 echo
 echo "Choose config:"
 echo "1. sdk35.xml (modern) - using Java 17+"
@@ -50,6 +68,7 @@ if [[ "$choice" = "1" ]]; then
     rm -rf platforms/android
     rm -rf node_modules
     npm ci
+    ensure_local_cordova_plugins
     cordova platform add android
     
     echo ""
@@ -95,6 +114,7 @@ elif [[ "$choice" = "2" ]]; then
     rm -rf node_modules
     rm -rf package-lock.json
     npm install
+    ensure_local_cordova_plugins
     cordova platform add android
     
     echo ""

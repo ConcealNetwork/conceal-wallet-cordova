@@ -1,0 +1,15 @@
+{
+  "change": "fix-biometric-enroll-crypto",
+  "notApplicable": null,
+  "rows": [
+    {
+      "capability": "cordova-biometric-unlock enroll/unlock secret contract",
+      "library": "cordova-plugins/cordova-plugin-biometric-unlock/src/android/BiometricUnlock.java",
+      "runtimeOwner": "Cordova plugin actions enroll/unlock (BiometricPrompt + Keystore AES-GCM)",
+      "writes": "Android Keystore key alias + SharedPreferences ciphertext blob per credentialId",
+      "reads": "N/A",
+      "uiConsumer": "Conceal Mobile APK Settings → Add passkey (wallet platform-unlock adapter)",
+      "evidence": ".forge/sessions/20260809T025130Z-cordova-biometric-unlock-e773e1/verify-evidence.md#product-loop"
+    }
+  ]
+}

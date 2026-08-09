@@ -39,6 +39,14 @@
             {
               "xml": "<uses-feature android:name=\"android.hardware.camera2.autofocus\" android:required=\"false\" />",
               "count": 3
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.USE_BIOMETRIC\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.USE_FINGERPRINT\" />",
+              "count": 1
             }
           ],
           "application": [
@@ -93,6 +101,10 @@
             {
               "xml": "<feature name=\"SaveDialog\"><param name=\"android-package\" value=\"io.github.amphiluke.SaveDialog\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"BiometricUnlock\"><param name=\"android-package\" value=\"network.conceal.biometricunlock.BiometricUnlock\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -117,6 +129,9 @@
       "PACKAGE_NAME": "com.concealnetwork.concealmobile"
     },
     "cordova-plugin-save-dialog": {
+      "PACKAGE_NAME": "com.concealnetwork.concealmobile"
+    },
+    "cordova-plugin-biometric-unlock": {
       "PACKAGE_NAME": "com.concealnetwork.concealmobile"
     }
   },
@@ -206,6 +221,14 @@
       "id": "cordova-plugin-save-dialog.BlobKeeper",
       "file": "plugins/cordova-plugin-save-dialog/www/android/BlobKeeper.js",
       "pluginId": "cordova-plugin-save-dialog"
+    },
+    {
+      "id": "cordova-plugin-biometric-unlock.BiometricUnlock",
+      "file": "plugins/cordova-plugin-biometric-unlock/www/biometricUnlock.js",
+      "pluginId": "cordova-plugin-biometric-unlock",
+      "clobbers": [
+        "cordova.plugins.biometricUnlock"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -214,6 +237,7 @@
     "cordova-plugin-insomnia": "4.3.0",
     "cordova-plugin-app-version": "0.1.14",
     "cordova-plugin-network-information": "3.0.0",
-    "cordova-plugin-save-dialog": "2.0.1"
+    "cordova-plugin-save-dialog": "2.0.1",
+    "cordova-plugin-biometric-unlock": "1.0.0"
   }
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Biometric enroll fix — operator brief</title></head>
+<body>
+<h1>Fix biometric passkey enrollment in Conceal Mobile</h1>
+
+<h2>TL;DR</h2>
+<p>
+  Adding a passkey in the Android app currently fails with “Biometric unlock failed”
+  because the native plugin tries to use the secure keystore <em>before</em> asking
+  for your fingerprint. We fix the order: prompt first, then store the secret.
+  No change to camera permissions or wallet password logic.
+</p>
+
+<h2>What you'll get</h2>
+<ul>
+  <li>Settings → Security → Add passkey shows the system biometric dialog and completes enrollment.</li>
+  <li>Unlock with fingerprint/face works after enrollment.</li>
+  <li>Same encrypted wallet-password storage format as the web passkey path.</li>
+</ul>
+
+<h2>How it works</h2>
+<p>
+  The wallet still encrypts your password in JavaScript. The Cordova plugin only
+  produces a 32-byte secret after a successful biometric check — mirroring WebAuthn PRF
+  in browsers. Enrollment and unlock both use Android’s BiometricPrompt with a
+  keystore-backed cipher (encrypt on enroll, decrypt on unlock).
+</p>
+<pre>
+  Enroll:  create key → biometric prompt → encrypt secret → return to wallet
+  Unlock:  biometric prompt → decrypt secret → wallet decrypts password
+</pre>
+
+<h2>What changes for you</h2>
+<ul>
+  <li>Rebuild APK with <code>./switch.sh</code> after the plugin fix.</li>
+  <li>No new permissions beyond biometrics already declared.</li>
+</ul>
+
+<h2>Risks and open questions</h2>
+<ul>
+  <li>Devices with only “weak” biometrics must match prompt settings (we align with availability check).</li>
+  <li>Must rebuild native platform; www-only export is not enough.</li>
+</ul>
+
+<h2>Out of scope</h2>
+<ul>
+  <li>Camera permission flow (confirmed working).</li>
+  <li>Android browser WebAuthn / PRF limitations.</li>
+  <li>Removing legacy passkey polyfill in www.</li>
+</ul>
+
+<h2>Work overview</h2>
+<ol>
+  <li>Native plugin enroll crypto fix (3 tasks, small)</li>
+  <li>Rebuild verification (2 tasks, manual on device)</li>
+</ol>
+</body>
+</html>

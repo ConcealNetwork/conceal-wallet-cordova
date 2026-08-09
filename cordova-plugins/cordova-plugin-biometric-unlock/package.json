@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-biometric-unlock",
+  "version": "1.0.0",
+  "description": "Native biometric unlock for Conceal Mobile (Android Keystore + BiometricPrompt)",
+  "license": "BSD-3-Clause",
+  "keywords": ["cordova", "biometric", "fingerprint", "android"],
+  "cordova": {
+    "id": "cordova-plugin-biometric-unlock",
+    "platforms": ["android"]
+  }
+}
