@@ -20,7 +20,9 @@ import org.json.JSONObject;
 
 import java.security.KeyStore;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -38,8 +40,6 @@ public class BiometricUnlock extends CordovaPlugin {
     private static final int GCM_TAG_LENGTH = 128;
     private static final int SECRET_LENGTH = 32;
     private static final int CREDENTIAL_ID_LENGTH = 16;
-
-    private CallbackContext pendingCallback;
 
     @Override
     public boolean execute(String action, org.apache.cordova.CordovaArgs args, CallbackContext callbackContext) {
@@ -70,13 +70,11 @@ public class BiometricUnlock extends CordovaPlugin {
         }
     }
 
+    /** Strong biometrics only — must match Keystore key + BiometricPrompt allowed authenticators. */
     private boolean isBiometricAvailable() {
         BiometricManager manager = BiometricManager.from(cordova.getContext());
-        int authenticators = BiometricManager.Authenticators.BIOMETRIC_STRONG;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            authenticators |= BiometricManager.Authenticators.DEVICE_CREDENTIAL;
-        }
-        return manager.canAuthenticate(authenticators) == BiometricManager.BIOMETRIC_SUCCESS;
+        return manager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                == BiometricManager.BIOMETRIC_SUCCESS;
     }
 
     private void enroll(CallbackContext callbackContext) {
@@ -87,15 +85,18 @@ public class BiometricUnlock extends CordovaPlugin {
 
         cordova.getThreadPool().execute(() -> {
             String credentialId = null;
+            byte[] secret = null;
             try {
                 credentialId = randomBase64Url(CREDENTIAL_ID_LENGTH);
-                byte[] secret = randomBytes(SECRET_LENGTH);
+                secret = randomBytes(SECRET_LENGTH);
                 SecretKey key = createKey(credentialId);
                 Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
                 cipher.init(Cipher.ENCRYPT_MODE, key);
 
                 final String id = credentialId;
-                final byte[] secretCopy = secret.clone();
+                final byte[] enrollSecret = secret.clone();
+                wipe(secret);
+                secret = null;
                 final Cipher encryptCipher = cipher;
 
                 cordova.getActivity().runOnUiThread(() ->
@@ -107,26 +108,31 @@ public class BiometricUnlock extends CordovaPlugin {
                                 () -> {
                                     try {
                                         byte[] iv = encryptCipher.getIV();
-                                        byte[] ciphertext = encryptCipher.doFinal(secretCopy);
+                                        byte[] ciphertext = encryptCipher.doFinal(enrollSecret);
                                         saveBlob(id, iv, ciphertext);
                                         JSONObject result = new JSONObject();
                                         result.put("credentialId", id);
-                                        result.put("secretBase64url", base64UrlEncode(secretCopy));
+                                        result.put("secretBase64url", base64UrlEncode(enrollSecret));
                                         callbackContext.success(result);
                                     } catch (Exception e) {
                                         removeStoredCredential(id);
                                         callbackContext.error("failed");
+                                    } finally {
+                                        wipe(enrollSecret);
                                     }
                                 },
-                                () -> {
+                                (token) -> {
                                     removeStoredCredential(id);
-                                    callbackContext.error("cancelled");
+                                    wipe(enrollSecret);
+                                    callbackContext.error(token);
                                 }));
             } catch (Exception e) {
                 if (credentialId != null) {
                     removeStoredCredential(credentialId);
                 }
                 callbackContext.error("failed");
+            } finally {
+                wipe(secret);
             }
         });
     }
@@ -160,16 +166,19 @@ public class BiometricUnlock extends CordovaPlugin {
                                 "Use biometrics to unlock",
                                 cipher,
                                 () -> {
+                                    byte[] secret = null;
                                     try {
-                                        byte[] secret = cipher.doFinal(blob.ciphertext);
+                                        secret = cipher.doFinal(blob.ciphertext);
                                         JSONObject result = new JSONObject();
                                         result.put("secretBase64url", base64UrlEncode(secret));
                                         callbackContext.success(result);
                                     } catch (Exception e) {
                                         callbackContext.error("failed");
+                                    } finally {
+                                        wipe(secret);
                                     }
                                 },
-                                () -> callbackContext.error("cancelled")));
+                                (token) -> callbackContext.error(token)));
             } catch (Exception e) {
                 callbackContext.error("failed");
             }
@@ -260,12 +269,11 @@ public class BiometricUnlock extends CordovaPlugin {
             String subtitle,
             Cipher cipher,
             Runnable onSuccess,
-            Runnable onError) {
+            Consumer<String> onAuthError) {
         FragmentActivity activity = requireFragmentActivity(callbackContext);
         if (activity == null) {
             return;
         }
-        pendingCallback = callbackContext;
         Executor executor = ContextCompat.getMainExecutor(activity);
         BiometricPrompt prompt = new BiometricPrompt(
                 activity,
@@ -273,14 +281,12 @@ public class BiometricUnlock extends CordovaPlugin {
                 new BiometricPrompt.AuthenticationCallback() {
                     @Override
                     public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-                        pendingCallback = null;
                         onSuccess.run();
                     }
 
                     @Override
                     public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-                        pendingCallback = null;
-                        onError.run();
+                        onAuthError.accept(mapAuthErrorCode(errorCode));
                     }
 
                     @Override
@@ -291,6 +297,26 @@ public class BiometricUnlock extends CordovaPlugin {
 
         BiometricPrompt.CryptoObject cryptoObject = new BiometricPrompt.CryptoObject(cipher);
         prompt.authenticate(buildPromptInfo(title, subtitle), cryptoObject);
+    }
+
+    /**
+     * Maps BiometricPrompt error codes to the JS contract tokens consumed by
+     * conceal-next-wallet {@code mapCordovaError}.
+     */
+    private static String mapAuthErrorCode(int errorCode) {
+        switch (errorCode) {
+            case BiometricPrompt.ERROR_USER_CANCELED:
+            case BiometricPrompt.ERROR_NEGATIVE_BUTTON:
+            case BiometricPrompt.ERROR_CANCELED:
+                return "cancelled";
+            case BiometricPrompt.ERROR_HW_UNAVAILABLE:
+            case BiometricPrompt.ERROR_HW_NOT_PRESENT:
+            case BiometricPrompt.ERROR_NO_BIOMETRICS:
+            case BiometricPrompt.ERROR_NO_DEVICE_CREDENTIAL:
+                return "unsupported";
+            default:
+                return "failed";
+        }
     }
 
     private BiometricPrompt.PromptInfo buildPromptInfo(String title, String subtitle) {
@@ -310,6 +336,12 @@ public class BiometricUnlock extends CordovaPlugin {
             return null;
         }
         return (FragmentActivity) cordova.getActivity();
+    }
+
+    private static void wipe(byte[] bytes) {
+        if (bytes != null) {
+            Arrays.fill(bytes, (byte) 0);
+        }
     }
 
     private static String keystoreAlias(String credentialId) {

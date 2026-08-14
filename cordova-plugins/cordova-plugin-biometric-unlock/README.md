@@ -26,10 +26,13 @@ tracked plugin under `cordova-plugins/` is the right layer (not a polyfill).
 
 ## JS API (`cordova.plugins.biometricUnlock`)
 
-- `isAvailable()` → boolean
+- `isAvailable()` → boolean (Class 3 / strong biometrics only — not PIN-only devices)
 - `enroll()` → `{ credentialId, secretBase64url }`
 - `unlock(credentialId)` → `{ secretBase64url }`
 - `remove(credentialId)`
+
+Errors reject with one of: `"cancelled"` (user dismiss), `"unsupported"` (no strong
+biometric hardware/enrollment), `"failed"` (lockout, timeout, crypto/process errors).
 
 The wallet adapter lives in `conceal-next-wallet` (`lib/auth/platform-unlock.ts`).
 
