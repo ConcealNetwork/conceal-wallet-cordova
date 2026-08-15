@@ -549,6 +549,9 @@ function each (objects, func, context) {
 
 function clobber (obj, key, value) {
     var needsProperty = false;
+    if (key === '__proto__' || key === 'prototype' || key === 'constructor') {
+        return;
+    }
     try {
         obj[key] = value;
     } catch (e) {
@@ -1712,7 +1715,7 @@ function findCordovaPath () {
     var term = '/cordova.js';
     for (var n = scripts.length - 1; n > -1; n--) {
         var src = scripts[n].src.replace(/\?.*$/, ''); // Strip any query param (CB-6007).
-        if (src.indexOf(term) === (src.length - term.length)) {
+        if (src.indexOf(term, src.length - term.length) !== -1) {
             path = src.substring(0, src.length - term.length) + '/';
             break;
         }
