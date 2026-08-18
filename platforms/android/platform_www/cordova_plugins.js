@@ -84,6 +84,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "id": "cordova-plugin-save-dialog.BlobKeeper",
       "file": "plugins/cordova-plugin-save-dialog/www/android/BlobKeeper.js",
       "pluginId": "cordova-plugin-save-dialog"
+    },
+    {
+      "id": "cordova-plugin-biometric-unlock.BiometricUnlock",
+      "file": "plugins/cordova-plugin-biometric-unlock/www/biometricUnlock.js",
+      "pluginId": "cordova-plugin-biometric-unlock",
+      "clobbers": [
+        "cordova.plugins.biometricUnlock"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -92,6 +100,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-insomnia": "4.3.0",
     "cordova-plugin-app-version": "0.1.14",
     "cordova-plugin-network-information": "3.0.0",
-    "cordova-plugin-save-dialog": "2.0.1"
+    "cordova-plugin-save-dialog": "2.0.1",
+    "cordova-plugin-biometric-unlock": "1.0.0"
   };
 });

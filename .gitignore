@@ -28,3 +28,12 @@ conceal-mobile-*.apk
 
 # fdroid setup
 not-build.json
+
+# AI
+decisions.md
+docs/
+.forge/
+.cursor/
+specs/
+scripts/hooks/openspec-archive-agent-message.*
+scripts/hooks/check-pending-adrs.*

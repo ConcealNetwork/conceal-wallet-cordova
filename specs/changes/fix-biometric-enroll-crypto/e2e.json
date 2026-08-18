@@ -1,0 +1,5 @@
+{
+  "change": "fix-biometric-enroll-crypto",
+  "notApplicable": "Biometric enroll/unlock requires a physical Android device with enrolled biometrics; no headless CI command drives BiometricPrompt + Keystore.",
+  "steps": []
+}

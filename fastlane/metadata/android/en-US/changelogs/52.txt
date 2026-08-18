@@ -1,0 +1,2 @@
+- fix: selectInput amount filter dust out of transaction
+- update strongly suggested.

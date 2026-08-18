@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-biometric-unlock"
+        version="1.0.0">
+    <name>Biometric Unlock</name>
+    <description>BiometricPrompt + Android Keystore secret for Conceal wallet unlock</description>
+    <license>BSD-3-Clause</license>
+    <keywords>cordova,biometric,keystore,unlock</keywords>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BiometricUnlock">
+                <param name="android-package" value="network.conceal.biometricunlock.BiometricUnlock" />
+            </feature>
+        </config-file>
+
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+            <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+        </config-file>
+
+        <framework src="androidx.biometric:biometric:1.1.0" />
+
+        <source-file src="src/android/BiometricUnlock.java"
+                     target-dir="src/network/conceal/biometricunlock" />
+
+        <js-module src="www/biometricUnlock.js" name="BiometricUnlock">
+            <clobbers target="cordova.plugins.biometricUnlock" />
+        </js-module>
+    </platform>
+</plugin>
