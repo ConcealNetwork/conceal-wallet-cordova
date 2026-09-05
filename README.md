@@ -12,7 +12,7 @@ Add required platforms `cordova platform add android@latest`
 
 Configure Platform:
 
-- **Android** https://cordova.apache.org/docs/en/11.x/guide/platforms/android/index.html
+- **Android** https://cordova.apache.org/docs/en/latest/config_ref/
 
 ## Development
 

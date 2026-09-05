@@ -1,7 +1,7 @@
 {
   "name": "conceal-wallet-cordova",
   "displayName": "Conceal Mobile",
-  "version": "6.0.4",
+  "version": "6.0.5",
   "description": "THE SIMPLEST WAY TO USE CONCEAL – ANYWHERE AND ANY TIME",
   "homepage": "https://github.com/ConcealNetwork/conceal-wallet-cordova",
   "author": {
@@ -41,5 +41,8 @@
     "cordova-plugin-network-information": "~3.0.0",
     "cordova-plugin-save-dialog": "^2.0.0",
     "cordova-plugin-biometric-unlock": "file:cordova-plugins/cordova-plugin-biometric-unlock"
+  },
+  "overrides": {
+    "@xmldom/xmldom": "0.9.12"
   }
 } 
