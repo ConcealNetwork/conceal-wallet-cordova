@@ -1,0 +1,3 @@
+- more accurate interest calculations
+- update dependencies
+- keep a send intent when the network drops
