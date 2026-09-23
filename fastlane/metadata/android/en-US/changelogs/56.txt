@@ -1,0 +1,3 @@
+- update dependencies
+- allow installs on Android 16+ (remove maxSdk cap)
+- raise minSdk to 24; drop phantom clipboard permissions

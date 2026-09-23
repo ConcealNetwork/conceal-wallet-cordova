@@ -17,14 +17,6 @@
               "count": 4
             },
             {
-              "xml": "<uses-permission android:name=\"android.permission.READ_CLIPBOARD\" />",
-              "count": 3
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.WRITE_CLIPBOARD\" />",
-              "count": 3
-            },
-            {
               "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
               "count": 3
             },

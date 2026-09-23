@@ -1,126 +1,62 @@
 # F-Droid Submission Guide for Conceal Mobile Wallet
 
-This document outlines the requirements and steps for submitting the Conceal Mobile Wallet to F-Droid.
+Conceal Mobile is **live on F-Droid**. This document records how the Cordova shell is prepared for F-Droid builds and what maintainers/reviewers care about.
 
-## Requirements Checklist
+## Current release (this repo)
 
-### ✅ Completed Requirements
+| Field | Value |
+| --- | --- |
+| Package name | `com.concealnetwork.concealmobile` |
+| Version name | `6.0.5` |
+| Version code | `56` |
+| Config template | `configs/sdk35.xml` → `config.xml` via `./switch.sh` |
+| Min / target / compile SDK | 24 / 35 / 36 |
 
-1. **Metadata File**: `metadata/com.concealnetwork.concealmobile.yml`
-   - Contains app description, categories, license, and build configuration
-   - Includes screenshots section (placeholders created)
+Previous store build: **6.0.4** / versionCode **55**.
 
-2. **Gradle Configuration**: 
-   - Root `build.gradle` for F-Droid builds
-   - `settings.gradle` to include Android platform
-   - Existing Android platform gradle files
+## Requirements checklist
 
-3. **Build Scripts**:
-   - `build-fdroid.sh` (Linux/macOS)
-   - `build-fdroid.bat` (Windows)
+### Completed
 
-4. **Screenshots Directory**: `metadata/Screenshots/`
-   - Placeholder structure created
-
-## 📋 Still Needed
+1. **fdroiddata metadata** — maintained in the [fdroiddata](https://gitlab.com/fdroid/fdroiddata) recipe (not edited from this change).
+2. **Gradle / Cordova Android platform** — generated under `platforms/android` during build.
+3. **Build scripts** — `build-fdroid.sh` / `build-fdroid.bat`.
+4. **fastlane metadata** — `fastlane/metadata/android/en-US/` (changelogs keyed by versionCode).
 
 ### Screenshots
-- `main-wallet.png` - Main wallet interface
-- `send-transaction.png` - Send transaction screen
-- `receive-qr.png` - Receive screen with QR code
-- `settings.png` - Settings screen
 
-**Screenshot Requirements**:
-- Format: PNG
-- Resolution: At least 320x320 pixels
-- Content: Should show the actual app interface
-- No device frames or mockups
+Still useful for store listing polish (`metadata/Screenshots/` placeholders may exist). Prefer real app UI, PNG, ≥320×320, no device frames.
 
-### Build Testing
-Test the build process:
+## WASM provenance (closed F-Droid issue #17)
+
+The committed `www/` tree includes WebAssembly binaries (e.g. under `www/_next/static/media/*.wasm`). They are **byte-for-byte copies** of `wasm-pack` output from [conceal-lib-js](https://github.com/ConcealNetwork/conceal-lib-js), not hand-edited blobs.
+
+- F-Droid’s `scanignore` in fdroiddata whitelists these paths for the reproducible Cordova export.
+- At runtime the wallet loads them over **`https://localhost`** (Cordova WebView) so streaming WebAssembly instantiation works.
+
+No regeneration of `www/` is done in this repository’s F-Droid release workflow beyond committing the upstream Cordova export.
+
+## Version management
+
+- Bump **`version`** and **`android-versionCode`** in **both** `configs/sdk35.xml` and `configs/sdk30.xml` together (lockstep — same applicationId).
+- Run `./switch.sh` to regenerate `config.xml` from the F-Droid (sdk35) template.
+- Tag after human review (example: `v6.0.5-f-droid`).
+- Auto-update on F-Droid follows git tags / version checks in fdroiddata.
+
+## Build testing
+
 ```bash
-# Linux/macOS
+./switch.sh   # choose sdk35 + F-Droid when prompted
+# or
 ./build-fdroid.sh
-
-# Windows
-build-fdroid.bat
 ```
 
-## 📝 F-Droid Submission Process
+## Support
 
-### Option 1: GitHub (Recommended)
-1. **Fork the F-Droid Data Repository**:
-   - Go to https://github.com/fdroid/fdroiddata
-   - Click "Fork" to create your own copy
+- F-Droid docs: https://f-droid.org/docs/
+- fdroiddata: https://gitlab.com/fdroid/fdroiddata
+- Forum: https://forum.f-droid.org/
 
-2. **Add Your App**:
-   - Copy `metadata/com.concealnetwork.concealmobile.yml` to `metadata/com.concealnetwork.concealmobile.yml` in your fork
-   - Add screenshots to `metadata/Screenshots/`
+## License
 
-3. **Create Pull Request**:
-   - Submit a pull request to the main F-Droid repository
-   - Include a description of your app
-
-4. **Review Process**:
-   - F-Droid maintainers will review your submission
-   - They may request changes or additional information
-
-### Option 2: Email Submission
-If you prefer not to use GitHub, you can also submit via email:
-1. **Prepare Files**:
-   - Create a zip file with your metadata and screenshots
-   - Include a description of your app
-
-2. **Email Submission**:
-   - Send to: fdroid@lists.f-droid.org
-   - Subject: "App submission: Conceal Mobile Wallet"
-   - Include all required files and information
-
-### Option 3: Forum Submission
-1. **Join F-Droid Forum**:
-   - Go to https://forum.f-droid.org/
-   - Create an account
-
-2. **Post Submission**:
-   - Create a new topic in the "App Requests" section
-   - Include your metadata file and screenshots
-   - Provide app description and links
-
-## 🔧 Build Configuration Details
-
-### Metadata File Structure
-The metadata file includes:
-- **Categories**: Finance, Internet
-- **License**: MIT
-- **Build Configuration**: Gradle-based build
-- **Dependencies**: All Cordova plugins listed as source libraries
-
-### Build Process
-1. F-Droid will clone your repository
-2. Run the gradle build process
-3. Generate the APK using the specified configuration
-
-### Version Management
-- Current version: 5.0.0
-- Version code: 46
-- Auto-update mode: Version-based
-- Update check: Git tags
-
-## 🚀 Next Steps
-
-1. **Add Screenshots**: Take actual screenshots of your app
-2. **Test Build**: Ensure the build scripts work correctly
-3. **Submit**: Follow the F-Droid submission process
-4. **Monitor**: Track the review process and respond to feedback
-
-## 📞 Support
-
-For questions about F-Droid submission:
-- F-Droid Documentation: https://f-droid.org/docs/
-- F-Droid GitHub: https://github.com/fdroid/fdroiddata
-- F-Droid Forum: https://forum.f-droid.org/
-- F-Droid Email: fdroid@lists.f-droid.org
-
-## 📄 License
-
-This project is licensed under the MIT License, which is compatible with F-Droid requirements. 
+MIT — compatible with F-Droid requirements.

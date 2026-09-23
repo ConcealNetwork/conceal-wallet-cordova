@@ -1,148 +1,52 @@
 # F-Droid Requirements Checklist
 
-## ✅ Completed Requirements
+Conceal Mobile is **already published** on F-Droid. Use this checklist when cutting a new Cordova-shell release (templates → `./switch.sh` → commit → push → tag).
 
-### 1. Metadata File
-- **File**: `metadata/com.concealnetwork.concealmobile.yml`
-- **Status**: ✅ Complete
-- **Contains**:
-  - App description and features
-  - Categories (Finance, Internet)
-  - License (MIT)
-  - Source code and issue tracker links
-  - Build configuration
-  - Screenshots section (placeholders)
+## App identity
 
-### 2. Gradle Configuration
-- **Files**: 
-  - `build.gradle` (root level)
-  - `settings.gradle`
-  - `platforms/android/build.gradle` (existing)
-  - `platforms/android/app/build.gradle` (existing)
-- **Status**: ✅ Complete
-- **Features**:
-  - F-Droid specific build task
-  - APK output configuration
-  - Dependency management
+| Field | Value |
+| --- | --- |
+| **Package name** | `com.concealnetwork.concealmobile` |
+| **Version** | `6.0.5` |
+| **Version code** | `56` |
+| **License** | MIT |
+| **Categories** | Finance, Internet |
 
-### 3. Build Scripts
-- **Files**:
-  - `build-fdroid.sh` (Linux/macOS)
-  - `build-fdroid.bat` (Windows)
-- **Status**: ✅ Complete
-- **Features**:
-  - Automated Cordova build process
-  - Plugin installation
-  - APK generation and copying
+Previous: 6.0.4 / 55.
 
-### 4. Screenshots Directory
-- **Directory**: `metadata/Screenshots/`
-- **Status**: ✅ Structure created
-- **Needed**: Actual screenshots
+## Build configuration (sdk35 / F-Droid)
 
-### 5. Project Structure
-- **Status**: ✅ Complete
-- **Features**:
-  - Proper gitignore entries
-  - Documentation files
-  - Build configuration
+| Setting | Value |
+| --- | --- |
+| Build system | Cordova → Gradle |
+| Min SDK | 24 |
+| Target SDK | 35 |
+| Compile SDK | 36 |
+| `android-maxSdkVersion` | **unset** (must not block Android 16+) |
 
-## 📋 Still Required
+## Repository
 
-### Screenshots
-**Priority**: HIGH
-**Files needed**:
-- `metadata/Screenshots/main-wallet.png`
-- `metadata/Screenshots/send-transaction.png`
-- `metadata/Screenshots/receive-qr.png`
-- `metadata/Screenshots/settings.png`
+- Source: https://github.com/ConcealNetwork/conceal-wallet-cordova
+- Issues: https://github.com/ConcealNetwork/conceal-wallet-cordova/issues
+- Releases: https://github.com/ConcealNetwork/conceal-wallet-cordova/releases
+- fdroiddata recipe: https://gitlab.com/fdroid/fdroiddata (do not edit from casual shell PRs unless intentional)
 
-**Requirements**:
-- PNG format
-- Minimum 320x320 pixels
-- Actual app screenshots (no mockups)
-- No device frames
+## Release checklist
 
-### Build Testing
-**Priority**: HIGH
-**Action needed**:
-```bash
-# Test the build process
-./build-fdroid.sh  # Linux/macOS
-# or
-build-fdroid.bat   # Windows
-```
+- [ ] Templates updated (`configs/sdk35.xml` / `sdk30.xml`) in lockstep for version + versionCode
+- [ ] No `android-maxSdkVersion` preference
+- [ ] No phantom `READ_CLIPBOARD` / `WRITE_CLIPBOARD` permissions
+- [ ] `./switch.sh` regenerated `config.xml` from sdk35 for F-Droid
+- [ ] `fastlane/metadata/android/en-US/changelogs/<versionCode>.txt` present
+- [ ] `www/` is the intentional Cordova export (do not regenerate casually)
+- [ ] Human review, then tag (e.g. `v6.0.5-f-droid`)
 
-## 📝 F-Droid Submission Steps
+## WASM note (issue #17, closed)
 
-1. **Add Screenshots** (Required)
-   - Take screenshots of your app
-   - Place them in `metadata/Screenshots/`
-   - Update metadata file if needed
+`www/**/*.wasm` files are byte-copies of `wasm-pack` output from conceal-lib-js, whitelisted via fdroiddata `scanignore`, loaded over `https://localhost` for streaming instantiation.
 
-2. **Test Build** (Required)
-   - Run build scripts
-   - Verify APK generation
-   - Check for any build errors
+## Support
 
-3. **Fork F-Droid Data Repository**
-   - Go to https://gitlab.com/fdroid/fdroiddata
-   - Fork the repository
-
-4. **Add Your App**
-   - Copy metadata file to your fork
-   - Add screenshots
-   - Create merge request
-
-5. **Submit for Review**
-   - F-Droid maintainers will review
-   - Respond to any feedback
-
-**Alternative Submission Methods**:
-- **Email**: Send to fdroid@lists.f-droid.org
-- **Forum**: Post at https://forum.f-droid.org/
-
-## 🔧 Technical Details
-
-### App Information
-- **Package Name**: com.ConcealNetwork.ConcealMobile
-- **Version**: 5.0.0
-- **Version Code**: 46
-- **License**: MIT
-- **Categories**: Finance, Internet
-
-### Build Configuration
-- **Build System**: Gradle
-- **Android SDK**: 35
-- **Min SDK**: 22
-- **Target SDK**: 35
-- **Dependencies**: Cordova plugins listed as source libraries
-
-### Repository Information
-- **Source**: https://github.com/ConcealNetwork/conceal-wallet-cordova
-- **Issues**: https://github.com/ConcealNetwork/conceal-wallet-cordova/issues
-- **Releases**: https://github.com/ConcealNetwork/conceal-wallet-cordova/releases
-
-## 🎯 Next Actions
-
-1. **Immediate** (Before submission):
-   - [ ] Add actual screenshots
-   - [ ] Test build process
-   - [ ] Verify all files are correct
-
-2. **Submission**:
-   - [ ] Fork F-Droid data repository
-   - [ ] Add metadata and screenshots
-   - [ ] Create merge request
-   - [ ] Monitor review process
-
-## 📞 Support Resources
-
-- **F-Droid Documentation**: https://f-droid.org/docs/
-- **F-Droid GitLab**: https://gitlab.com/fdroid/fdroiddata
-- **F-Droid Forum**: https://forum.f-droid.org/
-- **F-Droid Wiki**: https://f-droid.org/wiki/
-
----
-
-**Status**: Ready for screenshots and testing! 🚀 
+- https://f-droid.org/docs/
+- https://gitlab.com/fdroid/fdroiddata
+- https://forum.f-droid.org/

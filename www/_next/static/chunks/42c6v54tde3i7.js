@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,5091,e=>{"use strict";var t=e.i(18566),u=e.i(71645);e.s(["default",0,function(){let e=(0,t.useRouter)(),l=(0,t.useSearchParams)();return(0,u.useEffect)(()=>{let t=l.toString();e.replace(`/wallet/pulse${t?`?${t}`:""}`)},[e,l]),null}])}]);
