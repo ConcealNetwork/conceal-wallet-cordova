@@ -1,0 +1,3 @@
+- stronger on-device wallet encryption (upgrades automatically when you unlock)
+- safer password change and encrypted backup import
+- stability and security hardening
