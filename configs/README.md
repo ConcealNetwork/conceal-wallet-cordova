@@ -8,7 +8,7 @@ This folder contains different `config.xml` and `package.json` configurations fo
 
 Both `sdk35.xml` / `sdk30.xml` and `package-sdk35.json` / `package-sdk30.json` share package id `com.concealnetwork.concealmobile`. Keep widget **`version`** / **`android-versionCode`** and npm **`version`** identical across both SDK tracks for every release so switching configs cannot produce a Play/F-Droid version collision.
 
-Current release identity: **6.0.5** / versionCode **56** (npm `version` **6.0.5** in both package templates).
+Current release identity: **6.0.9** / versionCode **60** (npm `version` **6.0.9** in both package templates).
 
 Do **not** set `android-maxSdkVersion` (it hard-blocks newer OS installs; target/compile SDK already define the build).
 
